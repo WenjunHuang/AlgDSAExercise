@@ -25,8 +25,4 @@ object LongestPalindromicSubstring {
 
 }
 
-@main
-def run(): Unit = {
-  import LongestPalindromicSubstring.Solution
-  println(Solution.longestPalindrome("babad"))
-}
+
