@@ -30,10 +30,10 @@ object DiameterOfBinaryTree {
   }
 
   //leetcode submit region end(Prohibit modification and deletion)
-  @main
-  def run(): Unit = {
-    val leaf = TreeNode(2)
-    val root = TreeNode(1, leaf, null)
-    println(Solution.diameterOfBinaryTree(root))
-  }
+//  @main
+//  def run(): Unit = {
+//    val leaf = TreeNode(2)
+//    val root = TreeNode(1, leaf, null)
+//    println(Solution.diameterOfBinaryTree(root))
+//  }
 }

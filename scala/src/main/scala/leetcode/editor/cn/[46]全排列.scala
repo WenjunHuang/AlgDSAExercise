@@ -21,18 +21,15 @@ object Permutations {
       if (track.length == nums.length) {
         res += track
       } else {
-        for (i <- nums.indices) {
-          if (!used(i)) {
-            // 做选择
-            used(i) = true
+        nums.indices.filterNot(used(_)).foreach { i =>
+          // 做选择
+          used(i) = true
 
-            // 进入下一层决策树
-            backtrack(nums, track :+ nums(i), used)
+          // 进入下一层决策树
+          backtrack(nums, track :+ nums(i), used)
 
-            // 取消选择
-            used(i) = false
-
-          }
+          // 取消选择
+          used(i) = false
         }
       }
     }
