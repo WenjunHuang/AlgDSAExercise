@@ -51,7 +51,4 @@ object PermutationInString {
 
 }
 
-@main
-def run(): Unit = {
-  println(PermutationInString.Solution.checkInclusion("ab", "eidbaooo"))
-}
+

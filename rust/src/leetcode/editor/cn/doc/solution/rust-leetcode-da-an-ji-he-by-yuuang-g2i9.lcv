@@ -1,0 +1,50 @@
+### 解题思路
+
+由于 Rust 写数据结构相关的资料特别少并且理解非常困难，所以专门建了个 Repo 用来记录 Rust 刷 leetcode 的解法并包含心得体会，欢迎 Star✨ 会长期稳定更新。  
+努力写出最容易理解的 Rust 代码。
+[https://github.com/zhangyuang/leetcode](https://github.com/zhangyuang/leetcode)
+
+`注: 以下代码并没有刻意追求最优解，主要目的在于熟悉 Rust 语法以及使用可读性强便于理解的代码来解决问题。欢迎 Star✨ 长期稳定保持更新。`
+
+### 代码
+
+* rust
+
+```rust
+impl Solution {
+    pub fn delete_duplicates(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut phead = Some(Box::new(ListNode {
+            val: -1,
+            next: head,
+        }));
+        let mut root = &mut phead;
+        while root.is_some() && root.as_mut()?.next.is_some() {
+            let root_next = &mut root.as_mut()?.next;
+            let root_next_ref = root_next.as_mut()?;
+            let root_next_next = &mut root_next_ref.next;
+            if root_next_next.is_some() {
+                if root_next_ref.val == root_next_next.as_ref()?.val {
+                    let res = root_next_ref.val;
+                    let mut guard = root_next_next;
+                    while guard.is_some() {
+                        // 找到第一个值不等于重复值的节点
+                        if guard.as_ref()?.val != res {
+                            break;
+                        }
+                        guard = &mut guard.as_mut()?.next;
+                    }
+                    if guard.is_some() {
+                        root.as_mut()?.next = guard.take();
+                        continue;
+                    } else {
+                        root.as_mut()?.next = None;
+                    }
+                }
+            }
+            root = &mut root.as_mut()?.next;
+        }
+        phead.as_mut()?.next.take()
+    }
+}
+```
+

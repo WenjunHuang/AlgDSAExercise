@@ -1,3 +1,5 @@
+import leetcode.editor.cn.ListNode
+
 object 分隔链表 {
     //leetcode submit region begin(Prohibit modification and deletion)
     /**

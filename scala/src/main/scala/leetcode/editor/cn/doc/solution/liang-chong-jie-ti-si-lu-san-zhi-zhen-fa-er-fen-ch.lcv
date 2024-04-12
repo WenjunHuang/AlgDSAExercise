@@ -1,0 +1,129 @@
+### 解题思路
+
+具体思路都在注释里
+
+### 代码
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    // 求最大公约数 --  辗转相除法
+    long long int getGCD(long long int a, long long int b){
+        if(a == 0 || b == 0){
+            return 0;
+        }
+        if(a < b){
+            return getGCD(b, a);
+        }
+        while(b != 0){
+            long long int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+    // 求最小公倍数
+    long long int getLCD(long long int a, long long int b){
+        if(a == 0 || b == 0){
+            return 0;
+        }
+        return a /  getGCD(a, b) * b;
+    }
+    int nthUglyNumber(int n, int a, int b, int c) {
+        // 这题更改了丑数的定义
+        // 丑数 = a * i / b * j / c * k  i, j, k分别为正整数
+        // 三指针法
+        /*
+        long long int p1 = 1, p2 = 1, p3 = 1;
+        long long int num;
+        long long int i = 1;
+        while(i <= n){
+            long long int n1 = p1 * a;
+            long long int n2 = p2 * b;
+            long long int n3 = p3 * c;
+            long long int maxVal = 0;
+            num = min(n1, min(n2, n3));
+            if(num == n1){
+                // floor 是向下取整, ceil 是向上取整
+                // 由于 a, b, c之间可能存在较大的差距, 所以可能很长一段时间都是只移动一个指针, 那么不妨利用 n1, n2, n3 的差距直接前进
+                long long int dis = floor((double)min(n2 - n1, n3 - n1) / a);
+                // 注意: 前进距离过大, 有可能超过了第 n 个数
+                // 其次: n - i 有可能为 0, 我们要避免这种情况
+                if(dis > (n - i)){
+                    dis = n - i;
+                }
+                // 为了避免 dis = 0, 造成死循环
+                if(dis < 1){
+                    dis = 1;
+                }
+                // 可能同时有多个值等于 num, 如果直接写在 if 里, 很有可能造成 i 多次增加
+                maxVal = maxVal > dis ? maxVal: dis;
+                p1 += dis;
+            }
+            if(num == n2){
+                long long int dis = floor((double)min(n1 - n2, n3 - n2) / b);
+                if(dis > (n - i)){
+                    dis = n - i;
+                }
+                if(dis < 1){
+                    dis = 1;
+                }
+                p2 += dis;
+                maxVal = maxVal > dis ? maxVal: dis;
+            }
+            if(num == n3){
+                long long int dis = floor((double)min(n1 - n3, n2 - n3) / c);
+                if(dis > (n - i)){
+                    dis = n - i;
+                }
+                if(dis < 1){
+                    dis = 1;
+                }
+                maxVal = maxVal > dis ? maxVal: dis;
+                p3 += dis;
+            }
+            i += maxVal;
+        }
+        return num;
+        */
+        // 二分查找
+        // 很容易确定小于等于 K 的丑数个数
+        // x1 : 能被 a 整除的个数
+        // x2 : 能被 b 整除的个数
+        // x3 : 能被 c 整除的个数
+        // x12 : 能被 a 和 b 整除的个数
+        // x13 : 能被 a 和 c 整除的个数
+        // x23 : 能被 b 和 c 整除的个数
+        // x123 : 能被 a 和 b 和 c 整除的个数
+        // 涉及知识点:
+        // 最大公约数: 辗转相除法
+        // 最小公倍数: m * n / (m 和 n 的最大公约数)
+        // 因此小于等于 K 的丑数个数 = x1 + x2 + x3 - x12 - x13 - x23 + x123
+        long long int left = 1, right = 2000000000; 
+        long long int ab = getLCD(a, b);
+        long long int ac = getLCD(a, c);
+        long long int bc = getLCD(b, c);
+        long long int abc = getLCD(ab, c);
+        while(left < right){
+            int mid = left + (right - left) / 2;
+            int x1 = mid / a;
+            int x2 = mid / b;
+            int x3 = mid / c;
+            int x12 = mid / ab;
+            int x13 = mid / ac;
+            int x23 = mid / bc;
+            int x123 = mid / abc;
+            int num = x1 + x2 + x3 - x12 - x13 - x23 + x123;
+            if(num < n) {
+                left = mid + 1;
+            }else{
+                right = mid;
+            }
+        }
+        return left;
+    }
+};
+```
+
