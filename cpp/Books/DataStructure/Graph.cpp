@@ -6,6 +6,7 @@
 #include <stack>
 #include <vector>
 #include <memory>
+#include <queue>
 
 enum class VStatus {
     UNDISCOVERED,
@@ -56,6 +57,39 @@ template<typename Tv, typename Te>
 class Graph {
 private:
     void reset() {
+        for (auto i = 0; i < n; i++) {
+            status(i) = VStatus::UNDISCOVERED;
+            dTime(i) = fTime(i) = -1;
+            parent(i) = -1;
+            priority(i) = std::numeric_limits<int>::max();
+            for (auto j = 0; j < n; j++) {
+                if (exists(i, j)) type(i, j) = EStatus::UNDETERMINED;
+            }
+        }
+
+    }
+
+    void BFS(int v, int &clock) {
+        std::queue<int> Q;
+        status(v) = VStatus::DISCOVERED;
+        Q.push(v);
+
+        while (!Q.empty()) {
+            auto vx = Q.front();
+            Q.pop();
+            dTime(vx) = ++clock;
+            for (auto u = firstNbr(vx); u > -1; u = nextNbr(vx, u)) {
+                if (status(u) == VStatus::UNDISCOVERED) {
+                    status(u) = VStatus::DISCOVERED;
+                    Q.push(u);
+                    type(vx, u) = EType::TREE;
+                    parent(u) = vx;
+                } else {
+                    type(vx, u) = EType::CROSS;
+                }
+            }
+            status(vx) = VStatus::VISITED;
+        }
 
     }
 
@@ -109,7 +143,15 @@ public:
 
     virtual int &weight(int, int) = 0;
 
-    void bfs(int);
+    void bfs(int s) {
+        reset();
+        int clock = 0;
+        int v = s;
+        do {
+            if (status(v) == VStatus::UNDISCOVERED)
+                BFS(v, clock);
+        } while (s != (v = (++v % n)));
+    }
 
     void dfs(int);
 
