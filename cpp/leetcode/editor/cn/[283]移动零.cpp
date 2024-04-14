@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <utility>
+#include <algorithm>
 #include <memory>
 
 using namespace std;
@@ -10,20 +11,17 @@ using namespace std;
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    int removeDuplicates(vector<int> &nums) {
-        if (nums.empty()) return 0;
-        auto fast = nums.begin();
+    void moveZeroes(vector<int> &nums) {
         auto slow = nums.begin();
-        while (fast != nums.end()) {
-            if (*fast != *slow) {
+        for (int & num : nums) {
+            if (num != 0) {
+                *slow = num;
                 slow++;
-                *slow = *fast;
             }
-            fast++;
         }
 
-        slow++;
-        return distance(nums.begin(), slow);
+        for_each(slow, nums.end(), [](auto &v) { v = 0; });
+
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
