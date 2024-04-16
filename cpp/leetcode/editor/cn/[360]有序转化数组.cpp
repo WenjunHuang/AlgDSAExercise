@@ -19,11 +19,12 @@ public:
             _left = vec.begin();
     }
 
-    void operator++(int n) {
+    IterHelper& operator++() {
         if (_reverse)
             _right++;
         else
             _left++;
+        return *this;
     }
 
     int &operator*() {
@@ -67,7 +68,7 @@ public:
                     *p = a * (*right) * (*right) + b * (*right) + c;
                     right--;
                 }
-                p++;
+                ++p;
             }
             return res;
         }
