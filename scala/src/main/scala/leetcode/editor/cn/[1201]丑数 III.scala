@@ -4,7 +4,11 @@ object UglyNumberIii {
   object Solution:
     def nthUglyNumber(n: Int, a: Int, b: Int, c: Int): Int = // 最大公因数
       @annotation.tailrec
-      def gcd(a: Long, b: Long): Long = if (b == 0) a else gcd(b, a % b)
+      def gcd(a: Long, b: Long): Long =
+        if a == 0 then b
+        else if b == 0 then a
+        else if a > b then gcd(b, a % b)
+        else gcd(a, b % a)
 
       // 最小公倍数
       def lcm(a: Long, b: Long): Long = a * b / gcd(a, b)
