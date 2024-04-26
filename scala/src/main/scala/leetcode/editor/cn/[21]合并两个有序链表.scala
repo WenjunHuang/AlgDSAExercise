@@ -1,4 +1,4 @@
-
+package leetcode.editor.cn
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.

@@ -3,9 +3,19 @@
 //
 
 #pragma once
-#include "BinNode.h"
 
-template<typename T> std::optional<BinNode<T>&> BinNode<T>::succ() {
-    return std::nullopt;
+template<typename T>
+std::optional<std::reference_wrapper<BinNode<T>>> BinNode<T>::succ() {
+    if (this->rc) {
+        auto s = rc.get();
+        while (s->lc) s = s->lc.get();
+        return {{*s}};
+    } else {
+        auto s = this;
+        while (s->isRChild()) s = s->parent;
+        s = s->parent;
 
+        if (s != nullptr) return {{*s}};
+        else return std::nullopt;
+    }
 }

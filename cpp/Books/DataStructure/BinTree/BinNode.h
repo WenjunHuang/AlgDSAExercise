@@ -68,14 +68,14 @@ struct BinNode {
 
     std::unique_ptr<BinNode<T>> abandonRC();
 
-    std::optional<BinNode<T> &> succ();
+    std::optional<std::reference_wrapper<BinNode<T>>> succ();
 
     bool isLChild() const {
-        return this->parent != nullptr && this->parent->lc->get() == this;
+        return this->parent != nullptr && this->parent->lc.get() == this;
     }
 
     bool isRChild() const {
-        return this->parent != nullptr && this->parent->rc->get() == this;
+        return this->parent != nullptr && this->parent->rc.get() == this;
     }
 
     template<BinNodeVisitor<T> VST>
@@ -93,3 +93,4 @@ struct BinNode {
 
 #include "BinNode_insert.h"
 #include "BinNode_trav.h"
+#include "BinNode_succ.h"

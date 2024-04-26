@@ -4,5 +4,5 @@ ThisBuild / scalaVersion := "3.4.1"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "leetcode"
+    name := "leetcode_cn"
   )

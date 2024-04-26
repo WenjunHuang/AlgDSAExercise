@@ -87,7 +87,23 @@ void travInI1(BinNode<T> *x, VST &visit) {
         if (cur->rc)
             goAlongLeftBranch(cur->rc.get(), s);
     }
+}
 
+template<typename T, BinNodeVisitor<T> VST>
+void travInI2(BinNode<T> *x, VST &visit) {
+    std::stack<BinNode<T> *> s;
+    while (true) {
+        if (x) {
+            s.push(x);
+            x = x->lc.get();
+        } else if (!s.empty()) {
+            x = s.top();
+            s.pop();
+            visit(x->data);
+            x = x->rc.get();
+        } else
+            break;
+    }
 }
 
 template<typename T>
