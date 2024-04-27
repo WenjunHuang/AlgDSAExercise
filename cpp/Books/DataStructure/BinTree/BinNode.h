@@ -92,5 +92,7 @@ struct BinNode {
 };
 
 #include "BinNode_insert.h"
-#include "BinNode_trav.h"
+#include "BinNode_travPre.h"
+#include "BinNode_travIn.h"
+#include "BinNode_travPost.h"
 #include "BinNode_succ.h"

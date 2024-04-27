@@ -7,6 +7,10 @@ if (APPLE)
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 endif ()
 
+# if msvc then set encoding to utf8
+if (MSVC)
+    add_compile_options("/utf-8")
+endif ()
 # 单个cc文件
 function(add_single_file_targets)
     include(CMakeParseArguments)
