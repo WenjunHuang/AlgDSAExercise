@@ -60,6 +60,14 @@ struct BinNode {
 
     BinNode<T> *insertAsRC(T e);
 
+    bool hasLChild() const {
+        return this->lc != nullptr;
+    }
+
+    bool hasRChild() const {
+        return this->rc != nullptr;
+    }
+
     void adoptLC(std::unique_ptr<BinNode<T>> l);
 
     void adoptRC(std::unique_ptr<BinNode<T>> r);
