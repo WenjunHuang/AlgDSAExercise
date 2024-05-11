@@ -4,27 +4,25 @@
 
 #pragma once
 
-#include "BinTree.h"
-
 template<typename T>
-BinNode<T> *BinTree<T>::insertAsRoot(T e) {
+BinNodePtr<T> BinTree<T>::insertAsRoot(T e) {
     this->_size = 1;
-    this->_root = std::make_unique<BinNode<T>>(std::move(e));
-    return this->_root.get();
+    this->_root = BinNode<T>::create(std::move(e));
+    return this->_root;
 }
 
 template<typename T>
-BinNode<T> *BinTree<T>::insertAsLC(BinNode<T> *x, T e) {
+BinNodePtr<T> BinTree<T>::insertAsLC(BinNodePtr<T> x, T e) {
     this->_size++;
-    x->insertASLC(std::move(e));
+    x->insertAsLC(std::move(e));
     x->updateHeightAbove();
-    return x->lc.get();
+    return x->lc;
 }
 
 template<typename T>
-BinNode<T> *BinTree<T>::insertAsRC(BinNode<T> *x, T e) {
+BinNodePtr<T> BinTree<T>::insertAsRC(BinNodePtr<T> x, T e) {
     this->_size++;
     x->insertAsRC(std::move(e));
     x->updateHeightAbove();
-    return x->rc.get();
+    return x->rc;
 }

@@ -7,20 +7,20 @@
 #include <stack>
 
 template<typename T>
-static void gotoHLVFS(std::stack<BinNode<T> *> &s) {
+static void gotoHLVFS(std::stack<BinNodePosi<T>> &s) {
     while (auto x = s.top()) {
         if (x->hasLChild()) { //尽可能向左
-            if (x->hasRChild()) s.push(x->rc.get());
-            s.push(x->lc.get());
+            if (x->hasRChild()) s.push(x->rc);
+            s.push(x->lc);
         } else //实不得已
-            s.push(x->rc.get()); //才向右
+            s.push(x->rc); //才向右
     }
     s.pop();
 }
 
 template<typename T, typename VST>
-void travPostI(BinNode<T> *x, VST &visit) { // 二叉树的后序遍历（迭代版）
-    std::stack<BinNode<T> *> s; //辅助栈
+void travPostI(BinNodePosi<T> x, VST &visit) { // 二叉树的后序遍历（迭代版）
+    std::stack<BinNodePosi<T>> s; //辅助栈
     if (x != nullptr) s.push(x); //根节点入栈
 
     auto current = x;
@@ -33,10 +33,10 @@ void travPostI(BinNode<T> *x, VST &visit) { // 二叉树的后序遍历（迭代
 }
 
 template<typename T, BinNodeVisitor<T> VST>
-void travPostRecurrsive(BinNode<T> *x, VST &visit) {
+void travPostRecurrsive(BinNodePosi<T> x, VST &visit) {
     if (x == nullptr) return;
-    travPostRecurrsive(x->lc.get(), visit);
-    travPostRecurrsive(x->rc.get(), visit);
+    travPostRecurrsive(x->lc, visit);
+    travPostRecurrsive(x->rc, visit);
     visit(x->data);
 }
 

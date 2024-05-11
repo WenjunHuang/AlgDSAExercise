@@ -7,22 +7,22 @@
 template<typename T, BinNodeVisitor<T> VST>
 void travInRecurrsive(BinNode<T> *x, VST &visit) {
     if (x == nullptr) return;
-    travInRecurrsive(x->lc.get(), visit);
+    travInRecurrsive(x->lc, visit);
     visit(x->data);
-    travInRecurrsive(x->rc.get(), visit);
+    travInRecurrsive(x->rc, visit);
 }
 
 template<typename T>
-static void goAlongLeftBranch(BinNode<T> *x, std::stack<BinNode<T> *> &s) {
+static void goAlongLeftBranch(BinNodePosi<T> x, std::stack<BinNode<T> *> &s) {
     while (x != nullptr) {
         s.push(x);
-        x = x->lc.get();
+        x = x->lc;
     }
 }
 
 template<typename T, BinNodeVisitor<T> VST>
-void travInI1(BinNode<T> *x, VST &visit) {
-    std::stack<BinNode<T> *> s;
+void travInI1(BinNodePosi<T> x, VST &visit) {
+    std::stack<BinNodePosi<T>> s;
     goAlongLeftBranch(x, s);
 
     while (!s.empty()) {
@@ -30,22 +30,22 @@ void travInI1(BinNode<T> *x, VST &visit) {
         s.pop();
         visit(cur->data);
         if (cur->rc)
-            goAlongLeftBranch(cur->rc.get(), s);
+            goAlongLeftBranch(cur->rc, s);
     }
 }
 
 template<typename T, BinNodeVisitor<T> VST>
-void travInI2(BinNode<T> *x, VST &visit) {
-    std::stack<BinNode<T> *> s;
+void travInI2(BinNodePosi<T> x, VST &visit) {
+    std::stack<BinNodePosi<T>> s;
     while (true) {
         if (x) {
             s.push(x);
-            x = x->lc.get();
+            x = x->lc;
         } else if (!s.empty()) {
             x = s.top();
             s.pop();
             visit(x->data);
-            x = x->rc.get();
+            x = x->rc;
         } else
             break;
     }
@@ -57,12 +57,12 @@ void travInI3(BinNode<T> *x, VST &visit) {
     while (true) {
         if (!backtrack && x->lc) { //若有左子树且不是刚刚回溯
             // 则深入遍历左子树
-            x = x->lc.get();
+            x = x->lc;
         } else { // 否则-无左子树或刚刚回溯（相当于无左子树）
             visit(x->data); //访问该节点
 
             if (x->rc) { //若其右子树非空，则
-                x = x->rc.get();//深入右子树继续遍历
+                x = x->rc;//深入右子树继续遍历
                 backtrack = false; //并关闭回溯标致
             } else { //若右子树空，则
                 auto succ = x->succ();

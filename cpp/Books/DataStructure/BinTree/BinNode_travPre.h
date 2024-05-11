@@ -7,29 +7,29 @@
 #include <stack>
 
 template<typename T, BinNodeVisitor<T> VST>
-void travPrevRecurrsive(BinNode<T> *x, VST &visit) {
+void travPrevRecurrsive(BinNodePosi<T> x, VST &visit) {
     if (x == nullptr) return;
     visit(x->data);
-    travPrevRecurrsive(x->lc.get(), visit);
-    travPrevRecurrsive(x->rc.get(), visit);
+    travPrevRecurrsive(x->lc, visit);
+    travPrevRecurrsive(x->rc, visit);
 }
 
 
 template<typename T, BinNodeVisitor<T> VST>
-static void visitAlongLeftBranch(BinNode<T> *x, VST &visit, std::stack<BinNode<T> *> &s) {
+static void visitAlongLeftBranch(BinNodePosi<T> x, VST &visit, std::stack<BinNodePosi<T> > &s) {
     while (x) {
         visit(x->data);
 
         if (x->rc)
-            s.push(x->rc.get());
+            s.push(x->rc);
 
-        x = x->lc.get();
+        x = x->lc;
     }
 }
 
 template<typename T, BinNodeVisitor<T> VST>
-void travPrevI2(BinNode<T> *x, VST &visit) {
-    std::stack<BinNode<T> *> s;
+void travPrevI2(BinNodePosi<T> x, VST &visit) {
+    std::stack<BinNodePosi<T> > s;
     s.push(x);
     while (!s.empty()) {
         auto cur = s.top();

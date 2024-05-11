@@ -4,15 +4,19 @@
 
 #pragma once
 
+#include <memory>
 #include <cassert>
 #include "BinNode.h"
+
+template<typename T>
+class BinTree;
+
 
 template<typename T>
 class BinTree {
 protected:
     int _size = 0;
-    std::unique_ptr<BinNode<T>> _root = nullptr;
-
+    BinNodePosi<T> _root = nullptr;
 
 public:
     BinTree() = default;
@@ -21,42 +25,97 @@ public:
 
     bool empty() const { return !this->_root; }
 
-    BinNode<T> *root() const { return _root.get(); }
+    BinNodePosi<T> root() const { return this->_root; }
 
-    BinNode<T> *insertAsRoot(T e);
+    // 插入根节点
+    BinNodePosi<T> insertAsRoot(T e) {
+        this->_size = 1;
+        return _root = new BinNode<T>(std::move(e));
+    }
 
-    BinNode<T> *insertAsLC(BinNode<T> *x, T e);
+    //插入左孩子
+    BinNodePosi<T> insertAsLC(BinNodePosi<T> x, T e) {
+        this->_size++;
+        x->insertAsLC(std::move(e));
+        x->updateHeightAbove();
+        return x->lc;
+    }
 
-    BinNode<T> *insertAsRC(BinNode<T> *x, T e);
+    // 插入右孩子
+    BinNodePosi<T> insertAsRC(BinNodePosi<T> x, T e) {
+        this->_size++;
+        x->insertAsRC(std::move(e));
+        x->updateHeightAbove();
+        return x->rc;
+    }
 
     /**
      * t作为x左子树接入
      */
-    BinNode<T> *attachAsLC(BinNode<T> *x, BinTree<T> &&t);
+    BinNodePosi<T> attachAsLC(BinNodePosi<T> x, BinTree<T> *&t) {
+        x->lc = t->_root;
+        if (x->lc) x->lc->parent = x;
+
+        this->_size += t->_size;
+        x->updateHeightAbove();
+
+        t->_root = nullptr;
+        t->_size = 0;
+        release(t);
+        t = nullptr;
+
+        return x;
+    }
 
     /**
      * t作为x右子树接入
      */
-    BinNode<T> *attachAsRC(BinNode<T> *x, BinTree<T> &&t);
+    BinNodePosi<T> attachAsRC(BinNodePosi<T> x, BinTree<T> *&t) {
+        x->rc = t->_root;
+        if (x->rc) x->rc->parent = x;
+
+        this->_size += t->_size;
+        x->updateHeightAbove();
+
+        // 清理子树
+        t->_root = nullptr;
+        t->_size = 0;
+        release(t);
+        t = nullptr;
+
+        return x;
+    }
+
+    /**
+     * 子树删除
+     */
+    Rank remove(BinNodePosi<T> n) {
+        // 切断来自父节点的指针
+        fromParentTo(n, this->_root) = nullptr;
+        n->parent->updateHeightAbove();
+
+        auto rank = BinTree<T>::removeAt(n);
+        this->_size -= rank;
+        return rank;
+    }
 
     /**
      * 将子树x从当前树中摘除，并将其转换为一颗独立的树
      * x必须为二叉树中的合法位置
      */
-    BinTree<T> secede(BinNode<T> *x) {
-        assert(x->parent != nullptr);
-        auto parent = x->parent;
-        BinTree<T> tree;
-        if (x->isLChild()) {
-            tree._root = std::move(parent->lc);
-        } else {
-            tree._root = std::move(parent->rc);
-        }
+    BinTree<T> *secede(BinNodePosi<T> x) {
+        fromParentTo(x, this->_root) = nullptr;
+        x->parent->updateHeightAbove();
 
-        parent->updateHeightAbove();
-        tree._root->parent = nullptr;
-        tree._size = tree._root->size();
-        this->_size -= tree._size;
+        auto tree = new BinTree<T>;
+        tree->_root = x;
+        x->parent = nullptr;
+
+        // 更新新树的根节点信息
+        tree->_size = x->size();
+
+        // 更新本树的信息
+        this->_size -= tree->_size;
 
         return tree;
     }
@@ -90,5 +149,20 @@ public:
         if (this->_root) {
             this->_root->travPost(visit);
         }
+    }
+
+
+    /**
+     * 删除二叉树中位置x处的节点及其后代，返回被删除节点的数量
+     * @param x
+     * @return
+     */
+    static Rank removeAt(BinNodePosi<T> x) {
+        if (!x) return 0;
+
+        auto n = 1 + removeAt(x->lc) + removeAt(x->rc);
+        release(x->data);
+        release(x);
+        return n;
     }
 };
