@@ -109,7 +109,10 @@ struct BinNode {
         return this->rc != nullptr;
     }
 
-    BinNodePosi<T> succ() const {
+    /**
+     * 找出在中序遍历下，本节点的直接后继节点
+     */
+    BinNodePosi<T> succ() {
         if (this->rc) {
             auto s = this->rc;
             while (s->lc) s = s->lc;

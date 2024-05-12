@@ -68,3 +68,43 @@ TEST(BinTreeTest, AttachAsRC) {
     ASSERT_EQ(root->rc->data, 2);
     ASSERT_EQ(tree->size(), 2);
 }
+TEST(BinTreeTest, SecedeMethod) {
+    // Create a binary tree
+    auto tree = std::make_shared<BinTree<int>>();
+    auto root = tree->insertAsRoot(1);
+    auto leftChild = tree->insertAsLC(root, 2);
+    auto rightChild = tree->insertAsRC(root, 3);
+
+    // Secede the left subtree
+    auto secededTree = tree->secede(leftChild);
+
+    // Check that the seceded tree is correct
+    ASSERT_EQ(secededTree->root()->data, 2);
+    ASSERT_EQ(secededTree->size(), 1);
+
+    // Check that the original tree is correctly updated
+    ASSERT_EQ(tree->root()->data, 1);
+    ASSERT_EQ(tree->root()->rc->data, 3);
+    ASSERT_EQ(tree->size(), 2);
+    ASSERT_TRUE(!tree->root()->lc);
+}
+
+TEST(BinTreeTest, RemoveMethod) {
+    // Create a binary tree
+    auto tree = std::make_shared<BinTree<int>>();
+    auto root = tree->insertAsRoot(1);
+    auto leftChild = tree->insertAsLC(root, 2);
+    auto rightChild = tree->insertAsRC(root, 3);
+
+    // Remove the left child
+    auto removedSize = tree->remove(leftChild);
+
+    // Check that the removed size is correct
+    ASSERT_EQ(removedSize, 1);
+
+    // Check that the original tree is correctly updated
+    ASSERT_EQ(tree->root()->data, 1);
+    ASSERT_EQ(tree->root()->rc->data, 3);
+    ASSERT_EQ(tree->size(), 2);
+    ASSERT_TRUE(!tree->root()->lc);
+}

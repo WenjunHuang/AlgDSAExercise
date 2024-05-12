@@ -21,6 +21,12 @@ protected:
 public:
     BinTree() = default;
 
+    ~BinTree() {
+        if (_size > 0) {
+            removeAt(_root);
+        }
+    }
+
     int size() const { return this->_size; }
 
     bool empty() const { return !this->_root; }
