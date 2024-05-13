@@ -2,12 +2,12 @@ package leetcode.editor.cn
 object UglyNumberIii {
 //leetcode submit region begin(Prohibit modification and deletion)
   object Solution:
-    def nthUglyNumber(n: Int, a: Int, b: Int, c: Int): Int = // 最大公因数
+    def nthUglyNumber(n: Int, a: Int, b: Int, c: Int): Int =
+      // 最大公因数
       @annotation.tailrec
       def gcd(a: Long, b: Long): Long =
         if a == 0 then b
-        else if b == 0 then a
-        else if a > b then gcd(b, a % b)
+        else if a >= b then gcd(a % b,b)
         else gcd(a, b % a)
 
       // 最小公倍数
