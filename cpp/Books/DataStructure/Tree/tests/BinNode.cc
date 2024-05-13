@@ -106,28 +106,90 @@ TEST(BinNodeTest, PostOrderTraversal) {
     EXPECT_EQ(result, expected);
 }
 
-TEST(BinNodeTest, ZigMethod) {
-    // Create a small binary tree
-    BinNode<int> root(2);
-    BinNode<int> left(1);
-    BinNode<int> leftLeft(4);
-    BinNode<int> leftRight(5);
-    BinNode<int> right(3);
+TEST(BinNodeTest, Zig) {
+    // Create a binary node
+    BinNode<int> node(5);
 
-    left.lc = &leftLeft;
-    left.rc = &leftRight;
-    root.lc = &left;
-    root.rc = &right;
+//         5
+//        / \
+//       3   7
+//      / \ / \
+//     2  4 6  8
+//    / \
+//    1  0
+    // Insert elements
+    auto leftChild = node.insertAsLC(3);
+    leftChild->insertAsLC(2);
+    leftChild->insertAsRC(4);
 
-    // Call the zig method on the root
-    auto newRoot = root.zig();
+    auto rightChild = node.insertAsRC(7);
+    rightChild->insertAsLC(6);
+    rightChild->insertAsRC(8);
 
-    // Check that the tree has been correctly restructured
-    ASSERT_EQ(newRoot->data, 1);
-    ASSERT_EQ(newRoot->rc->data, 2);
-    ASSERT_EQ(newRoot->rc->rc->data, 3);
-    ASSERT_EQ(newRoot->rc->lc->data, 5);
-    ASSERT_EQ(newRoot->lc->data, 4);
-    ASSERT_TRUE(!newRoot->lc->lc);
-    ASSERT_TRUE(!newRoot->lc->rc);
+    auto leftLeftChild = leftChild->lc;
+    leftLeftChild->insertAsLC(1);
+    leftLeftChild->insertAsRC(0);
+
+    // Test zig
+//     3
+//    / \
+//   2   5
+//  / \  / \
+//  1  0 4  7
+//         / \
+//        6   8
+    auto zigNode = node.zig();
+    ASSERT_EQ(zigNode->data, 3);
+    ASSERT_EQ(zigNode->lc->data, 2);
+    ASSERT_EQ(zigNode->rc->data, 5);
+    ASSERT_EQ(zigNode->lc->lc->data, 1);
+    ASSERT_EQ(zigNode->lc->rc->data, 0);
+    ASSERT_EQ(zigNode->rc->lc->data, 4);
+    ASSERT_EQ(zigNode->rc->rc->data, 7);
+    ASSERT_EQ(zigNode->rc->rc->lc->data, 6);
+    ASSERT_EQ(zigNode->rc->rc->rc->data, 8);
+}
+
+TEST(BinNodeTest, Zag) {
+    // Create a binary node
+    BinNode<int> node(5);
+//         5
+//        / \
+//       3   7
+//      / \ / \
+//     2  4 6  8
+//            / \
+//           9  10
+    // Insert elements
+    auto leftChild = node.insertAsLC(3);
+    leftChild->insertAsLC(2);
+    leftChild->insertAsRC(4);
+
+    auto rightChild = node.insertAsRC(7);
+    rightChild->insertAsLC(6);
+    rightChild->insertAsRC(8);
+
+    auto rightRightChild = rightChild->rc;
+    rightRightChild->insertAsLC(9);
+    rightRightChild->insertAsRC(10);
+
+    // Test zag
+//         7
+//        / \
+//       5   8
+//      / \ / \
+//     3  6 9 10
+//    / \
+//   2  4
+    auto zagNode = node.zag();
+    ASSERT_EQ(zagNode->data, 7);
+    ASSERT_EQ(zagNode->lc->data, 5);
+    ASSERT_EQ(zagNode->lc->lc->data, 3);
+    ASSERT_EQ(zagNode->lc->rc->data, 6);
+    ASSERT_EQ(zagNode->lc->lc->lc->data, 2);
+    ASSERT_EQ(zagNode->lc->lc->rc->data, 4);
+    ASSERT_EQ(zagNode->rc->data, 8);
+    ASSERT_EQ(zagNode->rc->lc->data, 9);
+    ASSERT_EQ(zagNode->rc->rc->data, 10);
+
 }

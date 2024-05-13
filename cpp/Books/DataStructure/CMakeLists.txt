@@ -6,5 +6,4 @@ add_single_file_targets(PREFIX "DSA" DIR ${CMAKE_CURRENT_LIST_DIR}
         LIBS GTest::gtest GTest::gtest_main)
 
 add_subdirectory(Shared)
-add_subdirectory(BinTree)
-add_subdirectory(BST)
+add_subdirectory(Tree)

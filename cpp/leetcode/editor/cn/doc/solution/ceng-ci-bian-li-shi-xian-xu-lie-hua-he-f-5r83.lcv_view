@@ -1,0 +1,216 @@
+题解大多使用深度优先遍历（前序后序等）这种递归算法，反序列时也是使用递归进行反序列化
+其实可以凭借直觉利用层次遍历实现。
+序列化时的终止条件为：如果当前层的孩子节点都为null时则结束，避免不必要的遍历。这部分比较简单。
+
+* cpp
+
+```cpp
+string serialize(TreeNode* root) {
+    string res;
+    if(root == nullptr) {
+        return res;
+    }
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        int cur_size = q.size();
+        bool flag = true;
+        for(int i = 0; i < cur_size; i++) {
+            TreeNode* tmp = q.front();
+            q.pop();
+            if( tmp ) {
+                res += "," + to_string(tmp->val);
+                if( tmp->left || tmp->right )
+                    flag = false;
+                q.push(tmp->left);
+                q.push(tmp->right);
+            }
+            else 
+                res += ",null";
+        }
+        if(flag)
+            break;
+    }
+    res.erase(res.begin());  // 去掉刚开始的','
+    // cout << res << endl;
+    return res;
+}
+```
+
+反序列化时，有两种方式：
+1. 双指针的方式：首先，根据逗号解析字符串，将其放入数组中；想象一下，我们从根节点开始构建一棵树，依次在其下面添加孩子节点，如果父节点为null的话就不对其进行添加。左指针指向父节点，右指针指向子节点。
+
+* cpp
+
+```cpp
+    TreeNode* deserialize(string data) {
+        if(data.size() == 0)
+            return nullptr;
+        stringstream iss(data);
+        string token;
+        vector<TreeNode*> arr;
+        while( getline(iss, token, ',') ) {
+            if( token == "null" ) {
+                arr.push_back(nullptr);
+            }else {
+                arr.push_back(new TreeNode(stoi(token)));
+            }
+        }
+        int n = arr.size();                     // 左右指针方式
+        int l = 0;                              // 指向父节点
+        int r = 1;                              // 指向孩子节点
+        while(r < n) {
+            if( arr[l] != nullptr ) {
+                arr[l]->left = arr[r];                  // 依次进行分配，此处可以模拟一下
+                if( r + 1 < n ) {
+                    arr[l]->right = arr[r + 1];
+                }
+                r += 2;
+            }
+            l++;
+        }
+        return arr[0];
+    }
+
+```
+
+2. 反序列化的第二种方式。**此处推导出了一个非常类似于完全二叉树的方式**。父节点索引为$i$时(从0开始)，那么左孩子索引为$2*(i-m)+1$,右孩子索引为$2*(i-m)+2$,其中$m$代表数组中在$i$之前出现的null的个数。
+
+* cpp
+
+```cpp
+TreeNode* deserialize(string data) {
+    // ...与上述一致
+    int n = arr.size();
+    int total_level_num = 0;      // 之前出现过的null的数量
+    for(int i = 0; i < n; i++) {
+        if( arr[i] != nullptr ) {
+            int tmp_idx = 2*(i - total_level_num) + 1;
+            if( tmp_idx < n ) {
+                arr[i]->left = arr[tmp_idx];
+            }
+            if( tmp_idx + 1 < n ) {
+                arr[i]->right = arr[tmp_idx + 1];
+            }
+        } else {
+            total_level_num++;
+        }
+    }
+    return arr[0];
+}
+```
+
+证明过程如下：
+我们知道在完全二叉树中，根序号为$i$时，其孩子节点为$2*i$和 $2*i+1$。本数组中索引从0开始，其孩子节点变为$2*i + 1$和 $2*i+2$;
+想象一下，如果我们可以对这个二叉树补全为完全二叉树，那么就很容易得到根和孩子节点之间的关系，反序列化就很容易。
+若想对其进行补全，我们需要统计null出现次数，由于null对不同层的补全效果不同，需要对前面层出现的null进行统计。
+具体做法为:
+1. actual_num代表的是当前层中有值的节点数量。
+2. cur_level_num统计的是当前层**当前位置之前**出现的null的个数。
+3. fix_num代表着上一层出现的null节点对本层的影响个数。其实际是之前的cur_level_num加权和，每往下一层需要乘2。
+4. cur_total代表着**当前层**补全为完全二叉树，总共缺失的数量。其实际上是fix_num的加和。(注意此处是指当前层，而非当前位置)
+   之所以说是当前层而非当前位置，是因为cur_total无脑的计算需要补全的数量，而不考虑上层中null节点在有值节点左右关系。这种方式相当于把下层所有有值节点都尽可能移动到最右侧，类似于下图。
+   ![QQ图片20230615162415.jpg](https://pic.leetcode.cn/1686817504-iJOsju-QQ%E5%9B%BE%E7%89%8720230615162415.jpg)
+   图中圆圈代表需要补全的东西，N代表null出现的位置。以数字3为例，其父节点已经确定，只需确定子节点即可，因此这种逻辑上的平移不会造成影响。
+
+假设当前数组中根序号为$i$时，其对应的在完全二叉树中的位置为：$i + cur\_total$
+其左孩子在完全二叉树中的位置为$2*(i + cur\_total) + 1 $, 但其需要去掉这些补全的东西，找到其真实位置。fix_num和cur_total在下层的数量都需要乘2，且需要减去补全的数量cur_total。因此下式成立:
+$2*(i + cur\_total) + 1 - 2*fix\_num - 2*cur\_level\_num - cur\_total = 2*(i-cur\_level\_num-fix\_num)+ cur\_total + 1$
+
+关于层数的统计，使用的是第一层为1，第二层为2，第三层为4，依次类推。维护当前层节点数量(包括补全节点)，其表达式为$actual\_num + fix\_num + cur\_level\_num$.
+
+* cpp
+
+```cpp
+TreeNode* deserialize(string data) {
+    if(data.size() == 0)
+        return nullptr;
+    stringstream iss(data);
+    string token;
+    vector<TreeNode*> arr;
+    while( getline(iss, token, ',') ) {
+        if( token == "null" ) {
+            arr.push_back(nullptr);
+        }else {
+            arr.push_back(new TreeNode(stoi(token)));
+        }
+    }
+    int n = arr.size();
+    long long fix_num = 0;        // 上层
+    int cur_level_num = 0;
+    long long cur_total = 0;      // 总共缺失数量
+    long actual_num = 0;
+    long cur_max = 1;
+    for(int i = 0; i < n; i++) {
+        cout << i << endl;
+        if( arr[i] != nullptr ) {
+            actual_num++;
+            long tmp_idx = (long)2*(i - cur_level_num - fix_num) + cur_total + 1;
+            if( tmp_idx < n ) {
+                arr[i]->left = arr[tmp_idx];
+            }
+            if( tmp_idx + 1 < n ) {
+                arr[i]->right = arr[tmp_idx + 1];
+            }
+        } else {
+            cur_level_num++;
+        }
+        if( actual_num + fix_num + cur_level_num >= cur_max ) {
+            fix_num += cur_level_num;
+            fix_num *= 2;
+            cur_total += fix_num;
+            cur_level_num = 0;
+            actual_num = 0;
+            cur_max = (cur_max << 1);
+        }
+    }
+    return arr[0];
+}
+```
+
+上述写法会造成溢出问题,因为测试用例中有一个只包含右孩子的1000层树，就会造成cur_total等变量溢出。
+1. 其实，通过cur_total和fix_num的关系，可以进行改进。假设第一层null的数量为$l_1$,第二层为$l_2$，依次类推。
+   假设当前层为第3层，那么$fix_num = l_1*2^3 + l_2*2^2 + l_3*2$;
+   那么$cur_total = (l_1*2^3 + l_2*2^2 + l_3*2) + (l_1*2^2 + l_2*2) + (l_1*2)$;
+   $2*fix_num - cur_total = (l_1 + l_2 + l_3)*2$;
+   因此，只需要一个变量来维护之前层出现的null数量即可，即下述代码中的total_level_num.
+2. 如何判断到了下一层？
+   我们知道上一层出现了actual_num个有值的节点，那么下一层应该有2*actual_num个节点(包含null节点)。通过这个关系可以判断出。
+
+改进后写法：
+
+* cpp
+
+```cpp
+TreeNode* deserialize(string data) {
+    // ...与上述一致
+    int cur_level_num = 0;        // 当前层遇到null的数量
+    int total_level_num = 0;      // 之前层的null的数量
+    int actual_num = 0;
+    int cur_max = 1;
+    for(int i = 0; i < n; i++) {
+        if( arr[i] != nullptr ) {
+            actual_num++;
+            int tmp_idx = 2*(i - cur_level_num - total_level_num) + 1;
+            if( tmp_idx < n ) {
+                arr[i]->left = arr[tmp_idx];
+            }
+            if( tmp_idx + 1 < n ) {
+                arr[i]->right = arr[tmp_idx + 1];
+            }
+        } else {
+            cur_level_num++;
+        }
+        if( actual_num + cur_level_num >= cur_max ) {
+            total_level_num += cur_level_num;
+            cur_level_num = 0;
+            actual_num = 0;
+            cur_max = 2*actual_num;
+        }
+    }
+    return arr[0];
+}
+```
+
+而cur_level_num + total_level_num实际上就是之前出现的null的数量。
+

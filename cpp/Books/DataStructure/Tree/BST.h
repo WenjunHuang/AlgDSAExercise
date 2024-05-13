@@ -31,6 +31,7 @@ static BinNodePosi<T> removeAt(BinNodePosi<T> &x, BinNodePosi<T> &hot) {
     } else { // 若左右子树均存在，则选择x的直接后继作为实际被摘除节点，为此需要
         w = w->succ(); // （在右子树中）找到x的直接后继w
         std::swap(x->data, w->data);
+
         auto u = w->parent;
         ((u == x) ? u->rc : u->lc) = succ = w->rc; // 隔离节点w，因为w为x的直接后继，所以w必定没有左节点
     }

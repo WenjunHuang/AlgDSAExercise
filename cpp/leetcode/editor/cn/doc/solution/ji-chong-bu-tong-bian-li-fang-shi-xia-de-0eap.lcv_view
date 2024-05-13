@@ -1,0 +1,208 @@
+序列化：使用 `#` 代表 空指针 nullptr , `( )`  仅表示子树的划分，序列化中不存在.  
+此处我采用的序列化为 例如前序遍历   "1,2,#,4,#,#,3,#,#"
+
+* 
+
+```
+前序遍历： 1 (2 # 4 # #) (3 # #)
+中序遍历： (# 2 # 4 #) 1 (# 3 #)
+后序遍历： (# # # 4 2) (# # 3) 1
+层序遍历： 1 2 3 # 4 # # # #
+```
+
+前序、后序、层序都能够很好的找到根节点，而且不同于一般构造二叉树的问题，此处将空指针的地方指出，相当于比较完整的给出了树的结构。
+
+反序列化时，在确定根节点后，紧接着确定某一子树，对当前子树采用递归，形成了相同的问题，类似于序列化过程中的递归问题。
+
+反序列化中值得注意的是，前序是利用序列化结果，依次从前往后构造节点，类似于队列；后序依次从后往前，类似于栈；
+
+中序时，由于无法从序列化结果中找到根节点位置，也就无法准确划分左右子树，无法形成递归的结构，这种方式不能反序列化！
+
+层序遍历思路类似，相对要麻烦一点点点，拿新结点一层一层的往后面接，这里可以考虑直接用vector加上索引（也可以用queue，但是vector访问简洁一点）
+
+* c++
+
+```c++
+/******** 先序遍历序列化与反序列化 *************/
+class Codec {
+public:
+    string data;
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        traverse(root);
+        data.pop_back(); // 去掉尾部 ,
+        return data;
+    }
+    void traverse(TreeNode* root) {
+        if (root == nullptr) {
+            data += "#,";
+            return;
+        }
+        data += (to_string(root->val) + ",");
+        traverse(root->left);
+        traverse(root->right);
+    }
+    queue<string> split(string& str) {
+        queue<string> ans;
+        if (str.empty()) return ans;
+        int size = str.size();
+        int pre = 0;
+        for (int i = 0; i <= size; ++i) {
+            if (i == size || str[i] == ',') {
+                ans.emplace(str.substr(pre, i-pre));
+                pre = i+1;
+            }
+        }
+        return ans;
+    }
+    
+    TreeNode* deserialize(queue<string>& data) {
+        if (data.empty())   return nullptr;
+        string first = data.front();
+        data.pop();
+        if (first == "#")   return nullptr;
+
+        TreeNode* root = new TreeNode(stoi(first));
+        root->left = deserialize(data);
+        root->right = deserialize(data);
+
+        return root;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        queue<string> iters = split(data);
+        return deserialize(iters);
+    }
+};
+
+/******** 后序遍历序列化与反序列化 *************/
+class Codec {
+public:
+    string data;
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        traverse(root);
+        data.pop_back(); // 去掉尾部 ,
+        return data;
+    }
+    void traverse(TreeNode* root) {
+        if (root == nullptr) {
+            data += "#,";
+            return;
+        }
+        traverse(root->left);
+        traverse(root->right);
+        data += (to_string(root->val) + ",");
+    }
+    stack<string> split(string& str) {
+        stack<string> ans;
+        if (str.empty()) return ans;
+        int size = str.size();
+        int pre = 0;
+        for (int i = 0; i <= size; ++i) {
+            if (i == size || str[i] == ',') {
+                ans.emplace(str.substr(pre, i-pre));
+                pre = i+1;
+            }
+        }
+        return ans;
+    }
+    TreeNode* deserialize(stack<string>& data) {
+        if (data.empty())   return nullptr;
+        string first = data.top();
+        data.pop();
+        if (first == "#")   return nullptr;
+
+        TreeNode* root = new TreeNode(stoi(first));
+        root->right = deserialize(data);
+        root->left = deserialize(data);
+
+        return root;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        stack<string> iters = split(data);
+        return deserialize(iters);
+    }
+};
+
+
+/******** 层序遍历序列化与反序列化 *************/
+class Codec {
+public:
+    string data;
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        if (root == nullptr)    return "";
+        string str;
+        queue<TreeNode*> q;
+        q.push(root);
+        while (!q.empty()) {
+            TreeNode* node = q.front();
+            q.pop();
+            if (node)
+                str += (to_string(node->val) + ",");
+            else {
+                str += "#,";
+                continue;
+            }
+            q.push(node->left);
+            q.push(node->right);
+        }
+        str.pop_back();
+        return str;
+    }
+
+    vector<string> split(string& str) {
+        vector<string> ans;
+        if (str.empty()) return ans;
+        int size = str.size();
+        int pre = 0;
+        for (int i = 0; i <= size; ++i) {
+            if (i == size || str[i] == ',') {
+                ans.emplace_back(str.substr(pre, i-pre));
+                pre = i+1;
+            }
+        }
+        return ans;
+    }
+    TreeNode* deserialize(vector<string>& data) {
+        if (data.empty())   return nullptr;
+        string node = data[0];
+
+        TreeNode* root = new TreeNode(stoi(node));
+        queue<TreeNode*> q;
+        q.push(root);
+
+       for(int i =1; i < data.size(); ) {
+            TreeNode* node = q.front();
+            q.pop();
+            if (node == nullptr)    continue;
+
+            string s_left = data[i++];
+            if (s_left == "#")
+                node->left = nullptr;
+            else
+                node->left = new TreeNode(stoi(s_left));
+            q.push(node->left);
+
+            string s_right = data[i++];
+            if (s_right == "#")
+                node->right = nullptr;
+            else
+                node->right = new TreeNode(stoi(s_right));
+            q.push(node->right);
+        }
+        return root;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        vector<string> iters = split(data);
+        return deserialize(iters);
+    }
+};
+```
+

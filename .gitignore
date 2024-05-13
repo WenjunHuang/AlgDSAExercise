@@ -11,8 +11,10 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 **/cmake-build-*/
-.idea/
+**/.idea/
 **/target/
 **/.bsp/
 **/out/
 **/builds/
+**/bin/
+**/obj/

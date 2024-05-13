@@ -12,13 +12,19 @@
 #include <compare>
 #include "release.h"
 
-using Rank = uint32_t;
+using Rank = int32_t;
 
 template<typename T>
 struct BinNode;
 
+
+template<typename VST, typename T>
+concept BinNodeVisitor = std::invocable<VST, T &>;
+
+template<typename T> using BinNodePosi = BinNode<T> *; //节点位置
+
 template<typename T>
-Rank stature(BinNode<T> *n) {
+constexpr Rank stature(BinNode<T> *n) {
 #if defined(DSA_REDBLACK)
 #else
     if (n) return n->height;
@@ -26,10 +32,15 @@ Rank stature(BinNode<T> *n) {
 #endif
 }
 
-template<typename VST, typename T>
-concept BinNodeVisitor = std::invocable<VST, T &>;
+template<typename T>
+constexpr bool isBalanced(BinNodePosi<T> x) {
+    return stature(x->lc) == stature(x->rc);
+}
 
-template<typename T> using BinNodePosi = BinNode<T> *; //节点位置
+template<typename T>
+constexpr auto balanceFactor(BinNodePosi<T> x) {
+    return stature(x->lc) - stature(x->rc);
+}
 
 template<typename T>
 constexpr bool isRoot(BinNodePosi<T> n);
@@ -125,14 +136,14 @@ struct BinNode {
         }
     }
 
-    bool isLChild() const {
+    [[nodiscard]] inline bool isLChild() const {
         if (auto p = this->parent)
             return p->lc == this;
         else
             return false;
     }
 
-    bool isRChild() const {
+    [[nodiscard]] inline bool isRChild() const {
         if (auto p = this->parent)
             return p->rc == this;
         else
@@ -158,12 +169,15 @@ struct BinNode {
 
     bool operator==(const BinNode<T> &bn) const requires std::equality_comparable<T> { return data == bn.data; }
 
+    /**
+     * 顺时针旋转（右旋）
+     * @return
+     */
     BinNodePosi<T> zig() {
         if (!this->lc) return this;
 
-        auto lchild = this->isLChild();
 
-        // 右旋节点是当前的左节点
+        // 右旋后左子节点替代当前节点的位置
         auto v = this->lc;
         v->parent = this->parent;
 
@@ -172,7 +186,7 @@ struct BinNode {
 
         // 建立右旋节点和父节点的父子关系
         if (auto p = this->parent) {
-            if (lchild) {
+            if (p->lc == this) {
                 p->lc = v;
             } else {
                 p->rc = v;
@@ -181,8 +195,43 @@ struct BinNode {
 
         // 将当前节点作为右旋节点的右节点
         v->rc = this;
+        this->parent = v;
+
+        // 更新高度
+        this->updateHeight();
+        v->updateHeight();
 
         return v;
+    }
+
+    /**
+     * 逆时针旋转（左旋）
+     * @return
+     */
+    BinNodePosi<T> zag() {
+        if (!this->rc) return this;
+
+        auto v = this->rc;
+        v->parent = this->parent;
+
+        this->rc = v->lc;
+
+        if (auto p = this->parent) {
+            if (p->lc == this) {
+                p->lc = v;
+            } else {
+                p->rc = v;
+            }
+        }
+
+        v->lc = this;
+        this->parent = v;
+
+        this->updateHeight();
+        v->updateHeight();
+
+        return v;
+
     }
 
     explicit BinNode(T e,

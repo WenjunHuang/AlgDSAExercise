@@ -16,7 +16,7 @@ char outbuf[SZ];
 
 class Zuma {
 public:
-    explicit Zuma(string &&balls, size_t limit = 3) : _balls(std::move(balls)), _limit(limit) {}
+    explicit Zuma(string balls, size_t limit = 3) : _balls(std::move(balls)), _limit(limit) {}
 
     void insetNewBallAt(int idx, char ball) {
         _balls.insert(idx, 1, ball);
@@ -59,7 +59,6 @@ private:
     }
 
     pair<int, int> tryExpandCancelRange(int fromLeft, int fromRight) {
-        char ball = _balls[fromLeft];
         int p1 = fromLeft;
         int p2 = fromRight;
         int count = 0;
@@ -67,6 +66,7 @@ private:
         // 如果left与right相等，那么p2往后移动一位，以免重复计算count
         if (fromLeft == fromRight) p2 += 1;
 
+        auto ball = _balls[fromLeft];
         while (p1 >= 0 && _balls[p1] == ball) {
             fromLeft = p1;
             count++;
@@ -96,12 +96,12 @@ void judge() {
     Zuma zuma(std::move(str));
 
     int m;
-    scanf("%d", &m);
+    scanf_s("%d", &m);
 
     for (auto i = 0; i < m; i++) {
         int k;
         char c;
-        scanf("%d %c", &k, &c);
+        scanf_s("%d %c", &k, &c);
         zuma.insetNewBallAt(k, c);
         const string &ball = zuma.getBalls();
         if (ball.empty())
