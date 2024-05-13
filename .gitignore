@@ -18,3 +18,4 @@ _deps
 **/builds/
 **/bin/
 **/obj/
+**/node_modules/
