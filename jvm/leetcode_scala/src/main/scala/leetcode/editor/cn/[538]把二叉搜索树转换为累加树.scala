@@ -6,18 +6,23 @@ object ConvertBstToGreaterTree {
     * _right }
     */
   object Solution {
-    var sum = 0
+    import scala.util.control.TailCalls.*
     def convertBST(root: TreeNode): TreeNode =
-      sum = 0
-      traverse(root)
-      root
+      var sum = 0
 
-    def traverse(node: TreeNode): Unit =
-      if node != null then
-        traverse(node.right)
-        sum += node.value
-        node.value = sum
-        traverse(node.left)
+      def traverse(node: TreeNode): TailRec[Unit] =
+        node match
+          case null => done(())
+          case _ =>
+            for
+              _ <- traverse(node.right)
+              _ = sum += node.value
+              _ = node.value = sum
+              _ <- traverse(node.left)
+            yield ()
+
+      traverse(root).result
+      root
 
   }
 //leetcode submit region end(Prohibit modification and deletion)

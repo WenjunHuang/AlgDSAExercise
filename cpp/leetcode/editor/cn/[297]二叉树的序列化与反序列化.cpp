@@ -122,7 +122,7 @@ public:
     TreeNode *deserializeWithPostorder() {
         if (_nodes.empty()) return nullptr;
 
-        auto last = _nodes.back();
+        auto last = std::move(_nodes.back());
         _nodes.pop_back();
         if (last == "#") {
             return nullptr;
@@ -166,14 +166,14 @@ public:
     }
 
 private:
-    static deque<string> split(const string &str, char delimiter = ',') {
+    static deque<string> split(const string &str, const char delimiter = ',') {
         deque<string> result;
         istringstream iss(str);
         string token;
 
         while (getline(iss, token, delimiter)) {
             if (!token.empty()) {
-                result.push_back(token);
+                result.push_back(std::move(token));
             }
         }
         return result;
@@ -188,12 +188,12 @@ public:
     // Encodes a tree to a single string.
     string serialize(TreeNode *root) {
         if (root == nullptr) return "#";
-        return Serializer(root).serializeWithLevelOrder();
+        return Serializer(root).serializeWithPostorder();
     }
 
     // Decodes your encoded data to tree.
     TreeNode *deserialize(string data) {
-        return Deserializer(data).deserializeWithLevelOrder();
+        return Deserializer(data).deserializeWithPostorder();
     }
 };
 
