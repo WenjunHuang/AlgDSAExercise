@@ -2,10 +2,7 @@ package leetcode.editor.cn
 
 object ValidateBinarySearchTree {
 
-    class TreeNode(var `val`: Int) {
-        var left: TreeNode? = null
-        var right: TreeNode? = null
-    }
+
 //leetcode submit region begin(Prohibit modification and deletion)
     /**
      * Example:
