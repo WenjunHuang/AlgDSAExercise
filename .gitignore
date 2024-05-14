@@ -19,3 +19,4 @@ _deps
 **/bin/
 **/obj/
 **/node_modules/
+**/__pycache__/
