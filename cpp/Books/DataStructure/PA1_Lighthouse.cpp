@@ -2,69 +2,70 @@
 // Created by rick on 2024/4/14.
 //
 
-#include <string>
 #include <cstring>
 #include <cinttypes>
-#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <utility>
 
 using namespace std;
+constexpr int SZ = 1 << 20;
+char inbuf[SZ];
+char outbuf[SZ];
+
 using Pos = pair<int64_t, int64_t>;
 constexpr int N = 4000000;
 Pos lightHouses[N];
 int n;
-int64_t count = 0;
+Pos *temp;
+int64_t amount = 0;
 
-void merge(int p, int q, int r) {
-    auto x = q - p + 1;
-    auto y = r - q;
+void merge(int low, int mid, int high) {
+    auto x = mid - low + 1;
+    auto y = high - mid;
 
-    if (lightHouses[q].second <= lightHouses[q + 1].second) {
-        count += x * y;
+    if (lightHouses[mid].second <= lightHouses[mid + 1].second) {
+        amount += x * y;
         return;
     }
-    auto b = new Pos[x];
-    auto c = new Pos[y];
+    memcpy(temp + low, lightHouses + low, (high - low + 1) * sizeof(Pos));
 
-    memcpy(b, lightHouses + p, x * sizeof(Pos));
-    memcpy(c, lightHouses + q + 1, y * sizeof(Pos));
-
-    auto i = 0;
-    auto j = 0;
-    for (auto k = p; k <= r; k++) {
-        if (i == x) {
-            lightHouses[k] = c[j++];
-        } else if (j == y) {
-            lightHouses[k] = b[i++];
-        } else if (b[i].second > c[j].second) {
-            lightHouses[k] = c[j++];
+    auto i = low;
+    auto j = mid + 1;
+    for (auto k = low; k <= high; k++) {
+        if (i == mid + 1) {
+            lightHouses[k] = temp[j++];
+        } else if (j == high + 1) {
+            lightHouses[k] = temp[i++];
+        } else if (temp[i].second > temp[j].second) {
+            lightHouses[k] = temp[j++];
         } else {
-            lightHouses[k] = b[i++];
-            count += y - j;
+            lightHouses[k] = temp[i++];
+            amount += high - j + 1;
         }
     }
-
-    delete[] c;
-    delete[] b;
 }
 
-void mergeSort(int p, int r) {
-    if (p < r) {
-        auto mid = p + (r - p) / 2;
-        mergeSort(p, mid);
-        mergeSort(mid + 1, r);
-        merge(p, mid, r);
+void sort(int low, int high) {
+    if (low < high) {
+        auto mid = low + (high - low) / 2;
+        sort(low, mid);
+        sort(mid + 1, high);
+        merge(low, mid, high);
     }
 }
 
 void go() {
+    temp = new Pos[n];
     qsort(lightHouses, n, sizeof(Pos), [](const void *x, const void *y) {
         auto a = (Pos *) x;
         auto b = (Pos *) y;
         return (int) (a->first - b->first);
     });
 
-    mergeSort(0, n - 1);
-    cout << count << endl;
+    sort(0, n - 1);
+    printf("%" PRId64 "\n",amount);
+    delete[] temp;
 }
 
 void test() {
@@ -85,9 +86,14 @@ void judge() {
     }
     go();
 }
-
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <utility>
+#include <iostream>
 int main() {
+    setvbuf(stdin, inbuf, _IOFBF, SZ);
+    setvbuf(stdout, outbuf, _IOFBF, SZ);
 //    test();
     judge();
-
 }

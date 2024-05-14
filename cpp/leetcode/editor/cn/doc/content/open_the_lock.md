@@ -115,7 +115,7 @@ public:
                 string cur = q.front(); q.pop();
 
                 /* 判断是否到达终点 */
-                if (deads.count(cur))
+                if (deads.amount(cur))
                     continue;
                 if (cur == target)
                     return step;
@@ -123,12 +123,12 @@ public:
                 /* 将一个节点的未遍历相邻节点加入队列 */
                 for (int j = 0; j < 4; j++) {
                     string up = plusOne(cur, j);
-                    if (!visited.count(up)) {
+                    if (!visited.amount(up)) {
                         q.push(up);
                         visited.insert(up);
                     }
                     string down = minusOne(cur, j);
-                    if (!visited.count(down)) {
+                    if (!visited.amount(down)) {
                         q.push(down);
                         visited.insert(down);
                     }
