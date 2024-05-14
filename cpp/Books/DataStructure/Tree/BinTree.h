@@ -130,33 +130,36 @@ public:
      * 层次遍历
      */
     template<typename VST>
-    void travLevel(VST &visit) {
+    void travLevel(VST visit) {
         if (this->_root) {
             this->_root->travLevel(visit);
         }
     }
 
     template<typename VST>
-    void travPre(VST &visit) {
+    void travPre(VST visit) {
         if (this->_root) {
             this->_root->travPre(visit);
         }
     }
 
     template<typename VST>
-    void travIn(VST &visit) {
+    void travIn(VST visit) {
         if (this->_root) {
             this->_root->travIn(visit);
         }
     }
 
     template<typename VST>
-    void travPost(VST &visit) {
+    void travPost(VST visit) {
         if (this->_root) {
             this->_root->travPost(visit);
         }
     }
 
+    BinNodePosi<T>& fromParentTo(BinNodePosi<T> p) {
+        return ::fromParentTo(p,this->_root);
+    }
 
     /**
      * 删除二叉树中位置x处的节点及其后代，返回被删除节点的数量

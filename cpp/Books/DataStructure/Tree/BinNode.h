@@ -234,7 +234,7 @@ struct BinNode {
 
     }
 
-    explicit BinNode(T e,
+    explicit BinNode(T&& e,
                      BinNodePosi<T> p = nullptr,
                      BinNodePosi<T> lc = nullptr,
                      BinNodePosi<T> rc = nullptr,
