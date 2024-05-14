@@ -1,0 +1,80 @@
+### 解题思路
+
+本题的关键是对于选中的值x，得出x是丑数序列中的第几个丑数。
+我们这里需要用到容斥原理。
+举例：a = 2, b = 3, c = 5
+![image.png](https://pic.leetcode.cn/1667973105-YSrQyh-image.png)
+**则指定数字x范围内的丑数数量为：**
+
+* java
+
+```java
+long count = x/a + x/b + x/c - x/lcm_ab - x / lcm_ac - x / lcm_bc + x / lcm_abc;
+```
+
+这里的lcm的含义为最小公倍数。
+
+* java
+
+```java
+// 求最小公倍数
+private long lcm(long a, long b) {
+    return a * 1L * (b / gcd(a, b));
+}
+
+// 求最大公约数
+private long gcd(long a, long b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+```
+
+这里解释一下为何后面要**加上x / lcm_abc**？
+因为 前面`x/a + x/b + x/c - x/lcm_ab - x / lcm_ac - x / lcm_bc`，将x/lcm_abc这部分加了3次又减了3次，相当于`x / lcm_abc`没有了，所以要加上这部分。
+
+#### 提示二
+
+求出第n个丑数，可以使用二分法中的左开右开方式来做。
+左边界`l = 0`，右边界`r = min(a, min(b, c)) * n + 1`
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public int nthUglyNumber(int n, int a, int b, int c) {
+        long lcm_ab = lcm(a, b);
+        long lcm_bc = lcm(b, c);
+        long lcm_ac = lcm(a, c);
+        long lcm_abc = lcm(a, lcm(b, c));
+        int min = min(a, min(b, c));
+        long l = 0, r = min * 1L * n + 1;
+        while (l + 1 < r) {
+            long m = l + (r - l) / 2;
+            long count = m / a + m / b + m / c - m / lcm_ab - m / lcm_ac - m / lcm_bc + m / lcm_abc;
+            if (count < n) {
+                l = m;
+            } else {
+                r = m;
+            }
+        }
+        return (int) r;
+    }
+
+    private int min(int a, int b) {
+        return Math.min(a, b);
+    }
+
+    // 求最小公倍数
+    private long lcm(long a, long b) {
+        return a * 1L * (b / gcd(a, b));
+    }
+
+    // 求最大公约数
+    private long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
+```
+
+![image.png](https://pic.leetcode.cn/1667971729-ddyXFI-image.png)

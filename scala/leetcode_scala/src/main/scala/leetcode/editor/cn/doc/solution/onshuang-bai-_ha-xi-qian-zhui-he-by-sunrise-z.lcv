@@ -1,0 +1,44 @@
+### 解题思路
+
+一看到求连续区间和问题，条件反射想到前缀和能否求解。
+具体可以把解分成三部分：只取左半部分的和，只取右半部分的和，取左右两部分的和，使用字典存储前缀和，值为步长，直接比较最后的结果即可
+代码看上去长，实则简单易懂
+
+![image.png](https://pic.leetcode-cn.com/1605414550-wBQlyo-image.png)
+
+### 代码
+
+* python3
+
+```python
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        if sum(nums)<x:return -1 #判断总和
+        n = len(nums)
+        ####计算左前缀和####
+        left = 0
+        ld= {}
+        for i in range(len(nums)):
+            left+=nums[i]
+            if left>x:break
+            ld[left]=i+1 
+        ####计算右前缀和####
+        right=0
+        rd = {}
+        for i in range(len(nums)-1,-1,-1):
+            right+=nums[i]
+            if right>x:break
+            rd[right]=n-i
+        ####比较只取左边和只取右边满足条件的步长#### 
+        cur = min(ld.get(x,float('inf')),rd.get(x,float('inf')) )
+        ####再比较两边都取满足条件的步长####
+        for lsum in ld:
+            if x-lsum in rd :
+                lrc =  rd[x-lsum]+ld[lsum]
+                if lrc<=n:
+                    cur = min(cur,lrc)
+        ####返回结果####
+        return cur if cur!=float('inf') else -1
+        
+```
+
