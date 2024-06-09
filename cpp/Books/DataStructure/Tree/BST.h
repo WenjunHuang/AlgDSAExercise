@@ -126,16 +126,19 @@ public:
         a->rc = t1;
         if (t1) t1->parent = a;
         a->updateHeight();
+
         c->lc = t2;
         if (t2) t2->parent = c;
         c->rc = t3;
         if (t3) t3->parent = c;
         c->updateHeight();
+
         b->lc = a;
         a->parent = b;
         b->rc = c;
         c->parent = b;
         b->updateHeight();
+
         return b; //该子树新的根节点
     }
 

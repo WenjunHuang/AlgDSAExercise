@@ -23,9 +23,17 @@ concept BinNodeVisitor = std::invocable<VST, T &>;
 
 template<typename T> using BinNodePosi = BinNode<T> *; //节点位置
 
+enum class RBColor {
+    RB_RED, RB_BLACK
+};
+
 template<typename T>
 constexpr Rank stature(BinNode<T> *n) {
 #if defined(DSA_REDBLACK)
+    if(n)
+        return n->height;
+    else
+        return 0;
 #else
     if (n) return n->height;
     else return -1;
@@ -82,6 +90,8 @@ struct BinNode {
 
     Rank height = 0; // 高度
     Rank npl = 1; // Null Path Length
+
+    RBColor color; // 颜色（红黑树）
 
     Rank size() const {
         Rank s = 1;
@@ -234,13 +244,14 @@ struct BinNode {
 
     }
 
-    explicit BinNode(T&& e,
+    explicit BinNode(T &&e,
                      BinNodePosi<T> p = nullptr,
                      BinNodePosi<T> lc = nullptr,
                      BinNodePosi<T> rc = nullptr,
                      int h = 0,
-                     int l = 1) :
-            data(std::move(e)), parent(p), lc(lc), rc(rc), height(h), npl(l) {}
+                     int l = 1,
+                     RBColor color = RBColor::RB_RED) :
+            data(std::move(e)), parent(p), lc(lc), rc(rc), height(h), npl(l),color(color) {}
 };
 
 template<typename T>
@@ -280,6 +291,18 @@ constexpr BinNodePosi<T> &fromParentTo(BinNodePosi<T> n, BinNodePosi<T> &default
             return n->parent->rc;
         }
     }
+}
+
+template<typename T>
+constexpr BinNodePosi<T> sibling(BinNodePosi<T> p) {
+    if (isLChild(p))
+        return p->parent->rc;
+    else
+        return p->parent->lc;
+}
+template<typename T>
+constexpr BinNodePosi<T> uncle(BinNodePosi<T> x) {
+    return sibling(x->parent);
 }
 
 #include "BinNode_travPre.h"

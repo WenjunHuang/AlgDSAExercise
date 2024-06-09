@@ -9,7 +9,8 @@
 template<typename T>
 constexpr bool isAVLBalanced(BinNodePosi<T> x) {
     // avl平衡条件
-    return (-2 < balanceFactor(x)) && (balanceFactor(x) < 2);
+    auto fac = balanceFactor(x);
+    return -2 < fac && fac < 2;
 }
 
 /**
