@@ -7,3 +7,4 @@ add_single_file_targets(PREFIX "DSA" DIR ${CMAKE_CURRENT_LIST_DIR}
 
 add_subdirectory(Shared)
 add_subdirectory(Tree)
+add_subdirectory(Dictionary)
