@@ -1,0 +1,349 @@
+<p>给定一个二叉树 <code>root</code> ，返回其最大深度。</p>
+
+<p>二叉树的 <strong>最大深度</strong> 是指从根节点到最远叶子节点的最长路径上的节点数。</p>
+
+<p>&nbsp;</p>
+
+<p><strong>示例 1：</strong></p>
+
+<p><img alt="" src="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg" style="width: 400px; height: 277px;" /></p>
+
+<p>&nbsp;</p>
+
+<pre>
+<b>输入：</b>root = [3,9,20,null,null,15,7]
+<b>输出：</b>3
+</pre>
+
+<p><strong>示例 2：</strong></p>
+
+<pre>
+<b>输入：</b>root = [1,null,2]
+<b>输出：</b>2
+</pre>
+
+<p>&nbsp;</p>
+
+<p><strong>提示：</strong></p>
+
+<ul> 
+ <li>树中节点的数量在&nbsp;<code>[0, 10<sup>4</sup>]</code>&nbsp;区间内。</li> 
+ <li><code>-100 &lt;= Node.val &lt;= 100</code></li> 
+</ul>
+
+<details><summary><strong>Related Topics</strong></summary>树 | 深度优先搜索 | 广度优先搜索 | 二叉树</details><br>
+
+<div>👍 1862, 👎 0<span style='float: right;'><span style='color: gray;'><a href='https://github.com/labuladong/fucking-algorithm/discussions/939' target='_blank' style='color: lightgray;text-decoration: underline;'>bug 反馈</a> | <a href='https://labuladong.online/algo/fname.html?fname=jb插件简介' target='_blank' style='color: lightgray;text-decoration: underline;'>使用指南</a> | <a href='https://labuladong.online/algo/images/others/%E5%85%A8%E5%AE%B6%E6%A1%B6.jpg' target='_blank' style='color: lightgray;text-decoration: underline;'>更多配套插件</a></span></span></div>
+
+<div id="labuladong"><hr>
+
+**通知：已完成网站教程、网站习题、配套插件中所有多语言代码的校准，解决了之前 chatGPT 翻译可能出错的问题~**
+
+
+
+<p><strong><a href="https://labuladong.online/algo/slug.html?slug=maximum-depth-of-binary-tree" target="_blank">⭐️labuladong 题解</a></strong></p>
+<details><summary><strong>labuladong 思路</strong></summary>
+
+<div id="labuladong_solution_zh">
+
+## 基本思路
+
+> 本文有视频版：[二叉树/递归的框架思维（纲领篇）](https://www.bilibili.com/video/BV1nG411x77H)
+
+[我的刷题经验总结](https://labuladong.online/algo/essential-technique/algorithm-summary/) 说过，二叉树问题虽然简单，但是暗含了动态规划和回溯算法等高级算法的思想。
+
+下面提供两种思路的解法代码。
+
+**详细题解：[东哥带你刷二叉树（纲领篇）](https://labuladong.online/algo/essential-technique/binary-tree-summary/)**
+
+</div>
+
+**标签：[二叉树](https://labuladong.online/algo/)，[动态规划](https://labuladong.online/algo/)，[回溯算法](https://labuladong.online/algo/)**
+
+<div id="solution">
+
+## 解法代码
+
+
+
+<div class="tab-panel"><div class="tab-nav">
+<button data-tab-item="cpp" class="tab-nav-button btn " data-tab-group="default" onclick="switchTab(this)">cpp🤖</button>
+
+<button data-tab-item="python" class="tab-nav-button btn " data-tab-group="default" onclick="switchTab(this)">python🤖</button>
+
+<button data-tab-item="java" class="tab-nav-button btn active" data-tab-group="default" onclick="switchTab(this)">java🟢</button>
+
+<button data-tab-item="go" class="tab-nav-button btn " data-tab-group="default" onclick="switchTab(this)">go🤖</button>
+
+<button data-tab-item="javascript" class="tab-nav-button btn " data-tab-group="default" onclick="switchTab(this)">javascript🤖</button>
+</div><div class="tab-content">
+<div data-tab-item="cpp" class="tab-item " data-tab-group="default"><div class="highlight">
+
+```cpp
+// 注意：cpp 代码由 chatGPT🤖 根据我的 java 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
+// 本代码已经通过力扣的测试用例，应该可直接成功提交。
+
+// **** 解法一，回溯算法思路 ****
+class Solution {
+
+public:
+    int depth = 0;
+    int res = 0;
+
+    int maxDepth(TreeNode* root) {
+        traverse(root);
+        return res;
+    }
+
+    // 遍历二叉树
+    void traverse(TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        // 前序遍历位置
+        depth++;
+        // 遍历的过程中记录最大深度
+        res = max(res, depth);
+        traverse(root->left);
+        traverse(root->right);
+        // 后序遍历位置
+        depth--;
+    }
+};
+
+// **** 解法二，动态规划思路 ****
+class Solution2 {
+    // 定义：输入一个节点，返回以该节点为根的二叉树的最大深度
+public:
+    int maxDepth(TreeNode* root) {
+        if (root == nullptr) {
+            return 0;
+        }
+        int leftMax = maxDepth(root->left);
+        int rightMax = maxDepth(root->right);
+        // 根据左右子树的最大深度推出原二叉树的最大深度
+        return 1 + max(leftMax, rightMax);
+    }
+};
+```
+
+</div></div>
+
+<div data-tab-item="python" class="tab-item " data-tab-group="default"><div class="highlight">
+
+```python
+# 注意：python 代码由 chatGPT🤖 根据我的 java 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
+# 本代码已经通过力扣的测试用例，应该可直接成功提交。
+
+# **** 解法一，回溯算法思路 ****
+class Solution:
+    def __init__(self):
+        self.depth = 0
+        self.res = 0
+
+    def maxDepth(self, root):
+        self.traverse(root)
+        return self.res
+
+    # 遍历二叉树
+    def traverse(self, root):
+        if root is None:
+            return
+
+        # 前序遍历位置
+        self.depth += 1
+        # 遍历的过程中记录最大深度
+        self.res = max(self.res, self.depth)
+        self.traverse(root.left)
+        self.traverse(root.right)
+        # 后序遍历位置
+        self.depth -= 1
+
+# **** 解法二，动态规划思路 ****
+class Solution2:
+    # 定义：输入一个节点，返回以该节点为根的二叉树的最大深度
+    def maxDepth(self, root):
+        if root is None:
+            return 0
+        leftMax = self.maxDepth(root.left)
+        rightMax = self.maxDepth(root.right)
+        # 根据左右子树的最大深度推出原二叉树的最大深度
+        return 1 + max(leftMax, rightMax)
+```
+
+</div></div>
+
+<div data-tab-item="java" class="tab-item active" data-tab-group="default"><div class="highlight">
+
+```java
+// **** 解法一，回溯算法思路 ****
+class Solution {
+
+    int depth = 0;
+    int res = 0;
+
+    public int maxDepth(TreeNode root) {
+        traverse(root);
+        return res;
+    }
+
+    // 遍历二叉树
+    void traverse(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        // 前序遍历位置
+        depth++;
+        // 遍历的过程中记录最大深度
+        res = Math.max(res, depth);
+        traverse(root.left);
+        traverse(root.right);
+        // 后序遍历位置
+        depth--;
+    }
+}
+
+// **** 解法二，动态规划思路 ****
+class Solution2 {
+    // 定义：输入一个节点，返回以该节点为根的二叉树的最大深度
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftMax = maxDepth(root.left);
+        int rightMax = maxDepth(root.right);
+        // 根据左右子树的最大深度推出原二叉树的最大深度
+        return 1 + Math.max(leftMax, rightMax);
+    }
+}
+```
+
+</div></div>
+
+<div data-tab-item="go" class="tab-item " data-tab-group="default"><div class="highlight">
+
+```go
+// 注意：go 代码由 chatGPT🤖 根据我的 java 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
+// 本代码已经通过力扣的测试用例，应该可直接成功提交。
+
+// **** 解法一，回溯算法思路 ****
+func maxDepth(root *TreeNode) int {
+    var res int
+    var depth int
+    traverse(root, &depth, &res)
+    return res
+}
+
+// 遍历二叉树
+func traverse(root *TreeNode, depth *int, res *int) {
+    if root == nil {
+        return
+    }
+
+    // 前序遍历位置
+    *depth++
+    // 遍历的过程中记录最大深度
+    if *depth > *res {
+        *res = *depth
+    }
+    traverse(root.Left, depth, res)
+    traverse(root.Right, depth, res)
+    // 后序遍历位置
+    *depth--
+}
+
+// **** 解法二，动态规划思路 ****
+func maxDepthDP(root *TreeNode) int {
+    // 定义：输入一个节点，返回以该节点为根的二叉树的最大深度
+    if root == nil {
+        return 0
+    }
+    leftMax := maxDepthDP(root.Left)
+    rightMax := maxDepthDP(root.Right)
+    // 根据左右子树的最大深度推出原二叉树的最大深度
+    return 1 + max(leftMax, rightMax)
+}
+
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}
+```
+
+</div></div>
+
+<div data-tab-item="javascript" class="tab-item " data-tab-group="default"><div class="highlight">
+
+```javascript
+// 注意：javascript 代码由 chatGPT🤖 根据我的 java 代码翻译，旨在帮助不同背景的读者理解算法逻辑。
+// 本代码已经通过力扣的测试用例，应该可直接成功提交。
+
+/**
+ * 解法一，回溯算法思路
+ */
+function maxDepth(root) {
+    let depth = 0;
+    let res = 0;
+    // 遍历二叉树
+    function traverse(root) {
+        if (root === null) {
+        return;
+        }
+
+        // 前序遍历位置
+        depth++;
+        // 遍历的过程中记录最大深度
+        res = Math.max(res, depth);
+        traverse(root.left);
+        traverse(root.right);
+        // 后序遍历位置
+        depth--;
+    }
+    traverse(root);
+    return res;
+}
+
+/**
+ * 解法二，动态规划思路
+ */
+
+// 定义：输入一个节点，返回以该节点为根的二叉树的最大深度
+function maxDepth2(root) {
+    if (root === null) {
+        return 0;
+    }
+    const leftMax = maxDepth2(root.left);
+    const rightMax = maxDepth2(root.right);
+    // 根据左右子树的最大深度推出原二叉树的最大深度
+    return 1 + Math.max(leftMax, rightMax);
+}
+```
+
+</div></div>
+</div></div>
+
+<hr /><details open hint-container details><summary style="font-size: medium"><strong>🌟🌟 算法可视化 🌟🌟</strong></summary><div id="data_mydata-maxdepth1" data="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"></div><div class="resizable aspect-ratio-container" style="height: 100%;">
+<div id="iframe_mydata-maxdepth1"></div></div>
+</details><hr /><br />
+
+<hr /><details open hint-container details><summary style="font-size: medium"><strong>🌈🌈 算法可视化 🌈🌈</strong></summary><div id="data_mydata-maxdepth2" data="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"></div><div class="resizable aspect-ratio-container" style="height: 100%;">
+<div id="iframe_mydata-maxdepth2"></div></div>
+</details><hr /><br />
+
+**类似题目**：
+  - [1376. 通知所有员工所需的时间 🟠](/problems/time-needed-to-inform-all-employees)
+  - [144. 二叉树的前序遍历 🟢](/problems/binary-tree-preorder-traversal)
+  - [543. 二叉树的直径 🟢](/problems/diameter-of-binary-tree)
+  - [559. N 叉树的最大深度 🟢](/problems/maximum-depth-of-n-ary-tree)
+  - [865. 具有所有最深节点的最小子树 🟠](/problems/smallest-subtree-with-all-the-deepest-nodes)
+  - [剑指 Offer 55 - I. 二叉树的深度 🟢](/problems/er-cha-shu-de-shen-du-lcof)
+
+</div>
+
+</details>
+</div>
+
