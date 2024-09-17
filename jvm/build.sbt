@@ -30,3 +30,16 @@ lazy val leetCodeJava = (project in file("leetcode_java"))
     // add junit5
     libraryDependencies += "org.junit.jupiter" % "junit-jupiter-api" % "5.10.2" %  Test
   )
+lazy val designPattern = (project in file("design_pattern"))
+  .settings(
+    name := "design_pattern",
+    kotlinLib("stdlib"),
+    kotlinVersion := "1.9.24",
+    // add kotest dependency
+    libraryDependencies ++=
+      Seq(
+        "io.kotest" % "kotest-assertions-core" % "5.9.0",
+        "io.kotest" % "kotest-runner-junit5" % "5.9.0"
+      )
+  )
+  .enablePlugins(KotlinPlugin)
