@@ -1,3 +1,5 @@
+package creation.factorymethod
+
 interface Button {
     fun render()
     fun onClick(closeDialog: () -> Unit)
