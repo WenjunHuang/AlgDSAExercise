@@ -1,4 +1,6 @@
 mod leetcode;
+mod stack_safe;
+
 use self::leetcode::editor::cn::MinimumWindowSubstring::Solution;
 
 fn main() {
