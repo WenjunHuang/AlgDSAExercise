@@ -28,7 +28,6 @@ import System.IO.Unsafe
 nonDivisibleSubset :: Int -> [Int] -> Int
 nonDivisibleSubset k s = 0
 
-backtrack :: [Int] -> Int ->
 
 lstrip = Data.Text.unpack . Data.Text.stripStart . Data.Text.pack
 

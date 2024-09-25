@@ -1,13 +1,14 @@
 import kotlin.Keys.{kotlinLib, kotlinVersion}
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / organization := "com.github.wenjunhuang"
 
 
 lazy val leetCodeScala = (project in file("leetcode_scala"))
   .settings(
     scalaVersion := "3.4.1",
     name := "leetcode_scala",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.18" % Test
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
   )
 
 lazy val leetCodeKotlin = (project in file("leetcode_kotlin"))
@@ -33,13 +34,15 @@ lazy val leetCodeJava = (project in file("leetcode_java"))
 lazy val designPattern = (project in file("design_pattern"))
   .settings(
     name := "design_pattern",
-    kotlinLib("stdlib"),
-    kotlinVersion := "1.9.24",
-    // add kotest dependency
-    libraryDependencies ++=
-      Seq(
-        "io.kotest" % "kotest-assertions-core" % "5.9.0",
-        "io.kotest" % "kotest-runner-junit5" % "5.9.0"
-      )
+    scalaVersion := "3.4.1",
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
+//    kotlinLib("stdlib"),
+//    kotlinVersion := "1.9.24",
+//    // add kotest dependency
+//    libraryDependencies ++=
+//      Seq(
+//        "io.kotest" % "kotest-assertions-core" % "5.9.0",
+//        "io.kotest" % "kotest-runner-junit5" % "5.9.0"
+//      )
   )
   .enablePlugins(KotlinPlugin)
