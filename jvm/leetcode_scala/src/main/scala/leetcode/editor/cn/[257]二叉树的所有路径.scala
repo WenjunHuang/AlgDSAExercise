@@ -1,40 +1,31 @@
 package leetcode.editor.cn
 
-object UniqueBinarySearchTreesIi {
-  import scala.util.control.TailCalls.*
+object BinaryTreePaths {
 //leetcode submit region begin(Prohibit modification and deletion)
   /** Definition for a binary tree node. class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) { var value: Int = _value var left: TreeNode = _left var right: TreeNode =
     * _right }
     */
   object Solution {
-    def generateTrees(n: Int): List[TreeNode] =
-      impl().evalState(Context(1, n))
 
-    private def impl(): State[Context, List[TreeNode]] =
-      import StateOps.*
-      get[Context].flatMap { ctx =>
-        if ctx.low > ctx.high then point(List(null))
-        else
-          (ctx.low to ctx.high).foldLeft(point(Nil: List[TreeNode])) { (acc, num) =>
-            for
-              a     <- acc
-              left  <- modify[Context](s => s.copy(low = ctx.low, high = num - 1)).flatMap(_ => impl())
-              right <- modify[Context](s => s.copy(low = num + 1, high = ctx.high)).flatMap(_ => impl())
-            yield a ++ (
-              for
-                l <- left
-                r <- right
-              yield
-                val node = TreeNode(num)
-                node.left = l
-                node.right = r
-                node
-            )
-          }
+    def binaryTreePaths(root: TreeNode): List[String] =
+      impl(root).execState(Context(Nil, Nil)).result
 
-      }
-
-    private case class Context(low: Int, high: Int)
+    private case class Context(path: List[String], result: List[String])
+    import StateOps.*
+    private def impl(node: TreeNode): State[Context, Unit] =
+      if node == null then point(())
+      else if node.left == null && node.right == null then
+        modify[Context] { ctx =>
+          val newPath = ctx.path :+ node.value.toString
+          Context(ctx.path, newPath.mkString("->") :: ctx.result)
+        }
+      else
+        for
+          _ <- modify[Context](ctx => ctx.copy(path = ctx.path :+ node.value.toString))
+          _ <- impl(node.left)
+          _ <- impl(node.right)
+          _ <- modify[Context](ctx => ctx.copy(path = ctx.path.take(ctx.path.length - 1)))
+        yield ()
 
     import scala.util.control.TailCalls.*
 
@@ -65,14 +56,9 @@ object UniqueBinarySearchTreesIi {
 
       def modify[S](ss: S => S): State[S, Unit] =
         for { s <- get[S]; _ <- put(ss(s)) } yield ()
-    }
 
+    }
   }
 //leetcode submit region end(Prohibit modification and deletion)
-}
 
-@main
-def runUniqueBinarySearchTreesIi: Unit = {
-  import UniqueBinarySearchTreesIi.Solution
-  println(Solution.generateTrees(3))
 }

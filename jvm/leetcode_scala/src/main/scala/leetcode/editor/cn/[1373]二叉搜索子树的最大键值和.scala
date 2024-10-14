@@ -1,42 +1,35 @@
 package leetcode.editor.cn
 
-object UniqueBinarySearchTreesIi {
-  import scala.util.control.TailCalls.*
+object MaximumSumBstInBinaryTree {
 //leetcode submit region begin(Prohibit modification and deletion)
   /** Definition for a binary tree node. class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) { var value: Int = _value var left: TreeNode = _left var right: TreeNode =
     * _right }
     */
   object Solution {
-    def generateTrees(n: Int): List[TreeNode] =
-      impl().evalState(Context(1, n))
-
-    private def impl(): State[Context, List[TreeNode]] =
-      import StateOps.*
-      get[Context].flatMap { ctx =>
-        if ctx.low > ctx.high then point(List(null))
-        else
-          (ctx.low to ctx.high).foldLeft(point(Nil: List[TreeNode])) { (acc, num) =>
-            for
-              a     <- acc
-              left  <- modify[Context](s => s.copy(low = ctx.low, high = num - 1)).flatMap(_ => impl())
-              right <- modify[Context](s => s.copy(low = num + 1, high = ctx.high)).flatMap(_ => impl())
-            yield a ++ (
-              for
-                l <- left
-                r <- right
-              yield
-                val node = TreeNode(num)
-                node.left = l
-                node.right = r
-                node
-            )
-          }
-
-      }
-
-    private case class Context(low: Int, high: Int)
 
     import scala.util.control.TailCalls.*
+    import StateOps.*
+
+    case class NodeInfo(isBst: Boolean, max: Int, min: Int, sum: Int)
+
+    def maxSumBST(root: TreeNode): Int =
+      findMaxMinSum(root).execState(0)
+
+    def findMaxMinSum(node: TreeNode): State[Int, NodeInfo] =
+      if node == null then point(NodeInfo(true, Int.MinValue, Int.MaxValue, 0))
+      else
+        for
+          left  <- findMaxMinSum(node.left)
+          right <- findMaxMinSum(node.right)
+          rtn <-
+            if left.isBst && right.isBst && left.max < node.value && right.min > node.value
+            then
+              for
+                v <- point(NodeInfo(true, math.max(right.max, node.value), math.min(left.min, node.value), left.sum + right.sum + node.value))
+                _ <- modify[Int](oldSum => math.max(oldSum, v.sum))
+              yield v
+            else point(NodeInfo(false, Int.MaxValue, Int.MinValue, 0))
+        yield rtn
 
     /** 栈安全的State Monad。可用于leetcode的用fp方式来解决问题。
       */
@@ -69,10 +62,4 @@ object UniqueBinarySearchTreesIi {
 
   }
 //leetcode submit region end(Prohibit modification and deletion)
-}
-
-@main
-def runUniqueBinarySearchTreesIi: Unit = {
-  import UniqueBinarySearchTreesIi.Solution
-  println(Solution.generateTrees(3))
 }

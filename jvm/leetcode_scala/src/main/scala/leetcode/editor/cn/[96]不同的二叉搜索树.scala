@@ -3,9 +3,17 @@ package leetcode.editor.cn
 object UniqueBinarySearchTrees {
 //leetcode submit region begin(Prohibit modification and deletion)
   object Solution {
-    def numTrees(n: Int): Int =
-      impl().evalState(Context(1, n))
+    def numTrees(n: Int): Int = catalanNumber(n).toInt
+//      impl().evalState(Context(1, n))
 
+    private def catalanNumber(n:Long):Long =
+      def combinatoric(n:Long,m:Long):Long =
+        if n == m || m == 0 then 1
+        else combinatoric(n,m-1) * (n-m+1) / m
+
+      val numer = combinatoric(2*n,n)
+      val frag = n + 1
+      numer / frag
     private def impl(): State[Context, Int] =
       import StateOps.*
       get[Context].flatMap { s =>

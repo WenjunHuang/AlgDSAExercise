@@ -16,11 +16,11 @@ using namespace std;
 class Solution {
 public:
     int numTrees(int n) {
-        return (int) catalanNumber(n);
-//        for (int i = 0; i < n + 1; i++) {
-//            memo.emplace_back(n + 1, 0);
-//        }
-//        return count(1, n);
+//        return (int) catalanNumber(n);
+        for (int i = 0; i < n + 1; i++) {
+            memo.emplace_back(n + 1, 0);
+        }
+        return count(1, n);
     }
 
     int64_t catalanNumber(int n) {

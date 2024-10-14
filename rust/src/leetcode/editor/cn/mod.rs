@@ -16,3 +16,4 @@ mod construct_binary_tree_from_preorder_and_inorder_traversal;
 mod serialize_and_deserialize_binary_tree;
 mod kth_smallest_element_in_a_bst;
 mod convert_bst_to_greater_tree;
+mod unique_binary_search_trees;
