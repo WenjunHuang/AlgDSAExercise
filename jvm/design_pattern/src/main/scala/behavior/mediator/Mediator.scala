@@ -28,7 +28,7 @@ class AuthenticationDialog extends Mediator:
 
   override def notify(sender: Component, event: String): Unit =
     if sender == loginOrRegisterChkBx && event == "check" then
-      if loginOrRegisterChkBx.checked then title = "Log in" else title = "Register"
+      if loginOrRegisterChkBx.checked then title = Some("Log in") else title = Some("Register")
     if sender == okBtn && event == "click" then
       if loginOrRegisterChkBx.checked then println("Try to find user in the database")
       else println("Try to register user in the system")
