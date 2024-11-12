@@ -1,0 +1,18 @@
+object ConstructBinaryTreeFromPreorderAndInorderTraversal {
+//leetcode submit region begin(Prohibit modification and deletion)
+/**
+ * Definition for a binary tree node.
+ * class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {
+ *   var value: Int = _value
+ *   var left: TreeNode = _left
+ *   var right: TreeNode = _right
+ * }
+ */
+object Solution {
+    def buildTree(preorder: Array[Int], inorder: Array[Int]): TreeNode = {
+        
+    }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
+}
