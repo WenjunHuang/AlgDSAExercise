@@ -12,25 +12,25 @@ lazy val leetcodeScala = (project in file("leetcode_scala"))
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
   )
 
-lazy val leetcodeKotlin = (project in file("leetcode_kotlin"))
-  .settings(
-    name := "leetcode_kotlin",
-    kotlinLib("stdlib"),
-    // add kotest dependency
-    libraryDependencies ++=
-      Seq(
-        "io.kotest" % "kotest-assertions-core" % "5.9.0",
-        "io.kotest" % "kotest-runner-junit5"   % "5.9.0"
-      )
-  )
-  .enablePlugins(KotlinPlugin)
-
-lazy val leetcodeJava = (project in file("leetcode_java"))
-  .settings(
-    name := "leetcode_java",
-    // add junit5
-    libraryDependencies += "org.junit.jupiter" % "junit-jupiter-api" % "5.10.2" % Test
-  )
+//lazy val leetcodeKotlin = (project in file("leetcode_kotlin"))
+//  .settings(
+//    name := "leetcode_kotlin",
+//    kotlinLib("stdlib"),
+//    // add kotest dependency
+//    libraryDependencies ++=
+//      Seq(
+//        "io.kotest" % "kotest-assertions-core" % "5.9.0",
+//        "io.kotest" % "kotest-runner-junit5"   % "5.9.0"
+//      )
+//  )
+//  .enablePlugins(KotlinPlugin)
+//
+//lazy val leetcodeJava = (project in file("leetcode_java"))
+//  .settings(
+//    name := "leetcode_java",
+//    // add junit5
+//    libraryDependencies += "org.junit.jupiter" % "junit-jupiter-api" % "5.10.2" % Test
+//  )
 
 lazy val designPattern = (project in file("design_pattern"))
   .settings(
