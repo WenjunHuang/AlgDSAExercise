@@ -10,6 +10,7 @@ public:
     Node* left;
     Node* right;
     Node* next;
+    Node* parent;
 
     Node() : val(0), left(NULL), right(NULL), next(NULL) {}
 
