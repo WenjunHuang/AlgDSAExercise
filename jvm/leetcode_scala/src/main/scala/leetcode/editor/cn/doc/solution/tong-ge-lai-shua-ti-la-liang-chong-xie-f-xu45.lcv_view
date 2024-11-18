@@ -1,0 +1,181 @@
+大家好，这是我的第 219 篇题解！
+
+![图片.png](https://pic.leetcode-cn.com/1646960129-cYznbr-%E5%9B%BE%E7%89%87.png)
+
+# 写在前面
+
+今天这道题是需要稍微观察一下的。
+
+经过观察，你会发现，删除某个节点之后，最多会把二叉树分割成 **三个部分** ：左子树、右子树、父节点及父节点的另一半子树（下面简称：父子树）。
+
+而我们知道，通过深度优先搜索我们是可以求出左右子树的节点数量的，这样的话，父子树的数量也就很容易求得了，为 总节点数 减去 左右子树的数量 再减 一。
+
+那么，上面三个数量都有了之后，相乘就是删除这个节点之后的分数，当然，这里有可能三个部分中缺失一部分或者两部分，缺失的部分我们用 1 来代替去相乘即可。
+
+然而，题目给定的是一个表示父节点的数组，所以，我们第一步是要先构造出来这颗二叉树。
+
+我这里提供两种写法，看你喜欢哪一种喽~
+
+# 写法一、使用类
+
+通常地，我们声明一个 TreeNode 的类来表示树中的一个节点，这样我们构造起来会比较简单。
+
+请看代码：
+
+* java
+
+```java
+class Solution {
+
+    long maxScore = 0;
+    int ans = 0;
+    int n;
+
+    public int countHighestScoreNodes(int[] parents) {
+        // 删除一个节点最多把整颗树分割成三部分：左子树、右子树、父节点及父节点的另一半子树
+        // 所以，我们可以遍历每个节点的左右子树的数目，父节点及父节点的另一半子树的数量就等于 总节点数 减去 左右子树的数目 再减 一
+        // 三者相乘就是分数，没有的部分用 1 代替
+        // 而我们需要先构造出来这颗树才能通过DFS遍历
+        this.n = parents.length;
+
+        TreeNode[] nodes = new TreeNode[n];
+        for (int i = 0; i < n; i++) {
+            nodes[i] = new TreeNode();
+        }
+
+        for (int i = 1; i < n; i++) {
+            nodes[parents[i]].addChild(nodes[i]);
+        }
+
+        dfs(nodes[0]);
+
+        return ans;
+    }
+
+    private int dfs(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftCount = dfs(node.left);
+        int rightCount = dfs(node.right);
+        int remain = n - leftCount - rightCount - 1;
+
+        long score = help(leftCount) * help(rightCount) * help(remain);
+        if (score == maxScore) {
+            ans++;
+        } else if (score > maxScore) {
+            maxScore = score;
+            ans = 1;
+        }
+
+        return leftCount + rightCount + 1;
+    }
+
+    private long help(int count) {
+        return count == 0 ? 1 : count;
+    }
+
+    static class TreeNode {
+        TreeNode left;
+        TreeNode right;
+
+        void addChild(TreeNode child) {
+            if (this.left == null) {
+                this.left = child;
+            } else {
+                this.right = child;
+            }
+        }
+    }
+}
+```
+
+- 时间复杂度：$O(n)$。
+- 空间复杂度：$O(n)$。
+
+运行结果如下：
+
+![图片.png](https://pic.leetcode-cn.com/1646960158-GiWtGq-%E5%9B%BE%E7%89%87.png)
+
+# 写法二、使用数组
+
+其实呢，在写法一中，你可以看到我们使用类只是为了记录每个节点的左右子节点，而题目中每个节点的编号是 0 到 n-1，所以，我们也可以声明两个数组分别表示左右子节点。
+
+请看代码：
+
+* java
+
+```java
+class Solution {
+
+    long maxScore = 0;
+    int ans = 0;
+    int n;
+
+    public int countHighestScoreNodes(int[] parents) {
+        // 删除一个节点最多把整颗树分割成三部分：左子树、右子树、父节点及父节点的另一半子树
+        // 所以，我们可以遍历每个节点的左右子树的数目，父节点及父节点的另一半子树的数量就等于 总节点数 减去 左右子树的数目 再减 一
+        // 三者相乘就是分数，没有的部分用 1 代替
+        // 而我们需要先构造出来这颗树才能通过DFS遍历
+        this.n = parents.length;
+
+        int[] lefts = new int[n];
+        int[] rights = new int[n];
+        for (int i = 0; i < n; i++) {
+            lefts[i] = -1;
+            rights[i] = -1;
+        }
+
+        for (int i = 1; i < n; i++) {
+            int p = parents[i];
+            if (lefts[p] == -1) {
+                lefts[p] = i;
+            } else {
+                rights[p] = i;
+            }
+        }
+
+        dfs(0, lefts, rights);
+
+        return ans;
+    }
+
+    private int dfs(int node, int[] lefts, int[] rights) {
+        if (node == -1) {
+            return 0;
+        }
+
+        int leftCount = dfs(lefts[node], lefts, rights);
+        int rightCount = dfs(rights[node], lefts, rights);
+        int remain = n - leftCount - rightCount - 1;
+
+        long score = help(leftCount) * help(rightCount) * help(remain);
+        if (score == maxScore) {
+            ans++;
+        } else if (score > maxScore) {
+            maxScore = score;
+            ans = 1;
+        }
+
+        return leftCount + rightCount + 1;
+    }
+
+    private long help(int count) {
+        return count == 0 ? 1 : count;
+    }
+}
+```
+
+- 时间复杂度：$O(n)$。
+- 空间复杂度：$O(n)$。
+
+运行结果如下：
+
+![图片.png](https://pic.leetcode-cn.com/1646960171-OOcKwI-%E5%9B%BE%E7%89%87.png)
+
+# 最后
+
+**如果对你有帮助，请点个赞吧，谢谢^^**
+
+欢迎关注公号『彤哥来刷题啦』，也欢迎在 leetcode 上[『关注我』](https://leetcode-cn.com/u/tong-zhu/)或者[『点我加V』](https://img.oicoding.cn/img/image-20220127105632802.png)，我拉你进『刷题群』，每日分享通俗易懂的高质量题解~
