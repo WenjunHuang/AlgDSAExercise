@@ -14,7 +14,7 @@ enum Status:
     }(if (_) Okay else Unreachable)
 
 object Status:
-  implicit val jsonEncoder: Encoder[Status] = Encoder.forProduct1("status")(_.toString)
+  given encoder: Encoder[Status] = Encoder.forProduct1("status")(_.toString)
 
 case class RedisStatus(value: Status)
 case class MySQLStatus(value: Status)

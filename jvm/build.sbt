@@ -47,12 +47,11 @@ lazy val fpLearn = (project in file("fp"))
         "org.typelevel" %% "cats-core"   % "2.12.0",
         "dev.zio"       %% "zio"         % "2.1.13",
         "org.typelevel" %% "squants"     % "1.8.3",
-        "org.typelevel" %% "squants-circe"     % "1.8.3",
         // add circe
 
-        "io.circe" %% "circe-core"           % "0.14.10",
-        "io.circe" %% "circe-generic"        % "0.14.10",
-        "io.circe" %% "circe-parser"         % "0.14.10",
+        "io.circe" %% "circe-core"    % "0.14.10",
+        "io.circe" %% "circe-generic" % "0.14.10",
+        "io.circe" %% "circe-parser"  % "0.14.10",
 //        "io.circe" %% "circe-generic-extras" % "0.14.10",
         // add redis4cats
         "dev.profunktor" %% "redis4cats-effects" % "1.7.1",
