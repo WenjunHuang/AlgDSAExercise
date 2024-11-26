@@ -14,7 +14,7 @@ object BrandParam:
   implicit val paramDecoder: QueryParamDecoder[BrandParam] = QueryParamDecoder[String]
   extension (b: BrandParam) def toDomain: BrandName        = BrandName(b.toLowerCase().capitalize)
 
-final case class ItemRoutes[F[_]: Monad](items: Items[F]) extends Http4sDsl[F]:
+final case class ItemRoutes[F[*]: Monad](items: Items[F]) extends Http4sDsl[F]:
   private[routes] val prefixPath = "/items"
 
   object BrandQueryParam extends OptionalQueryParamDecoderMatcher[BrandParam]("brand")

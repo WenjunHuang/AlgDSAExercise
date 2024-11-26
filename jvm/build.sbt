@@ -2,12 +2,12 @@ import kotlin.Keys.{ kotlinLib, kotlinVersion }
 
 ThisBuild / version       := "0.1.0-SNAPSHOT"
 ThisBuild / organization  := "com.github.wenjunhuang"
+ThisBuild / scalaVersion  := "3.4.1"
 ThisBuild / kotlinVersion := "1.9.24"
-ThisBuild / scalaVersion  := "2.13.15"
-ThisBuild / scalacOptions ++= Seq("-Xsource:3")
 
 lazy val leetcodeScala = (project in file("leetcode_scala"))
   .settings(
+    scalaVersion                           := "3.4.1",
     name                                   := "leetcode_scala",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
   )
@@ -40,31 +40,24 @@ lazy val designPattern = (project in file("design_pattern"))
 
 lazy val fpLearn = (project in file("fp"))
   .settings(
-    name         := "functional learn",
-    scalaVersion := "2.13.15",
+    name := "functional learn",
+    scalacOptions ++= Seq("-Ykind-projector"),
     libraryDependencies ++=
       Seq(
         "org.typelevel" %% "cats-effect" % "3.5.6",
         "org.typelevel" %% "cats-core"   % "2.12.0",
-        "dev.zio"       %% "zio"         % "2.1.13",
-        "org.typelevel" %% "squants"     % "1.8.3",
+        // add cats mtl
+        "org.typelevel" %% "cats-mtl" % "1.4.0",
+        "dev.zio"       %% "zio"      % "2.1.13",
+        "org.typelevel" %% "squants"  % "1.8.3",
         // add circe
 
-        "io.circe"   %% "circe-core"    % "0.14.10",
-        "io.circe"   %% "circe-generic" % "0.14.10",
-        "io.circe"   %% "circe-parser"  % "0.14.10",
-        "tf.tofu"    %% "tofu-kernel"   % "0.13.6",
-        "tf.tofu"    %% "tofu-core-ce3" % "0.13.6",
-        "tf.tofu"    %% "tofu-logging"  % "0.13.6",
-        "eu.timepit" %% "refined"       % "0.11.2",
-        "eu.timepit" %% "refined-cats"  % "0.11.2",
+        "io.circe" %% "circe-core"    % "0.14.10",
+        "io.circe" %% "circe-generic" % "0.14.10",
+        "io.circe" %% "circe-parser"  % "0.14.10",
 //        "io.circe" %% "circe-generic-extras" % "0.14.10",
         // add redis4cats
         "dev.profunktor" %% "redis4cats-effects" % "1.7.1",
-        "dev.profunktor" %% "http4s-jwt-auth"    % "2.0.0",
-        // add jwt scala
-        "com.github.jwt-scala" %% "jwt-core"  % "10.0.1",
-        "com.github.jwt-scala" %% "jwt-circe" % "10.0.1",
         // ad monocle
         "dev.optics" %% "monocle-core" % "3.3.0",
         // add cats retry
