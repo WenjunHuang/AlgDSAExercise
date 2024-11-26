@@ -13,7 +13,6 @@ import Debug.Trace
 import System.Environment
 import System.IO
 import System.IO.Unsafe
-import Prelude (sum, show, putStrLn, read, Int, String)
 
 --
 -- Complete the 'miniMaxSum' function below.

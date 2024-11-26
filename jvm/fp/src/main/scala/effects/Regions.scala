@@ -2,6 +2,7 @@ package effects
 
 import cats.effect.std.{ Semaphore, Supervisor }
 import cats.effect.{ IO, IOApp }
+import cats.effect.syntax.all.*
 
 import scala.util.Random
 import scala.concurrent.duration.*

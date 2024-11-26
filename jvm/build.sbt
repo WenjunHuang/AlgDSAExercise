@@ -41,12 +41,15 @@ lazy val designPattern = (project in file("design_pattern"))
 lazy val fpLearn = (project in file("fp"))
   .settings(
     name := "functional learn",
+    scalacOptions ++= Seq("-Ykind-projector"),
     libraryDependencies ++=
       Seq(
         "org.typelevel" %% "cats-effect" % "3.5.6",
         "org.typelevel" %% "cats-core"   % "2.12.0",
-        "dev.zio"       %% "zio"         % "2.1.13",
-        "org.typelevel" %% "squants"     % "1.8.3",
+        // add cats mtl
+        "org.typelevel" %% "cats-mtl" % "1.4.0",
+        "dev.zio"       %% "zio"      % "2.1.13",
+        "org.typelevel" %% "squants"  % "1.8.3",
         // add circe
 
         "io.circe" %% "circe-core"    % "0.14.10",
