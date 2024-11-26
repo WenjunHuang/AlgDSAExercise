@@ -1,26 +1,54 @@
 package leetcode.editor.cn
 
-object InsufficientNodesInRootToLeafPaths {
+import leetcode.editor.cn.BinaryTreeZigzagLevelOrderTraversal.Solution.Direction.LeftToRight
+
+object BinaryTreeZigzagLevelOrderTraversal {
   import scala.util.control.TailCalls.*
 //leetcode submit region begin(Prohibit modification and deletion)
   /** Definition for a binary tree node. class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) { var value: Int = _value var left: TreeNode = _left var right: TreeNode =
     * _right }
     */
   object Solution {
-    def sufficientSubset(root: TreeNode, limit: Int): TreeNode =
+
+    import scala.collection.mutable
+
+    def zigzagLevelOrder(root: TreeNode): List[List[Int]] =
       root match
-        case null => null
-        case _ if root.left == null && root.right == null =>
-          if root.value < limit then null
-          else root
+        case null => Nil
         case _ =>
-          val left  = sufficientSubset(root.left, limit - root.value)
-          val right = sufficientSubset(root.right, limit - root.value)
-          if left == null && right == null then null
-          else
-            root.left = left
-            root.right = right
-            root
+          val queue  = mutable.Queue[TreeNode](root)
+          var res    = List[List[Int]]()
+          var curDir = Direction.LeftToRight
+          while queue.nonEmpty do
+            // 按照从左到右的方式添加队列
+            val size             = queue.size
+            var level: List[Int] = Nil
+            for _ <- 0 until size yield
+              val cur = queue.dequeue()
+              if cur.left != null then queue.enqueue(cur.left)
+              if cur.right != null then queue.enqueue(cur.right)
+
+              curDir match
+                case Direction.LeftToRight =>
+                  level = level :+ cur.value
+                case Direction.RightToLeft =>
+                  level = cur.value +: level
+
+            res = res :+ level
+            curDir = curDir.switchDirection
+          res
+
+    enum Direction {
+      case LeftToRight
+      case RightToLeft
+
+      def switchDirection: Direction =
+        this match
+          case LeftToRight =>
+            RightToLeft
+          case RightToLeft =>
+            LeftToRight
+    }
   }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -51,5 +79,4 @@ object InsufficientNodesInRootToLeafPaths {
     def modify[S](ss: S => S): State[S, Unit] =
       for { s <- get[S]; _ <- put(ss(s)) } yield ()
   }
-
 }

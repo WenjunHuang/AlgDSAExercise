@@ -1,26 +1,33 @@
 package leetcode.editor.cn
 
-object InsufficientNodesInRootToLeafPaths {
+
+object BinaryTreeLevelOrderTraversal {
   import scala.util.control.TailCalls.*
 //leetcode submit region begin(Prohibit modification and deletion)
   /** Definition for a binary tree node. class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) { var value: Int = _value var left: TreeNode = _left var right: TreeNode =
     * _right }
     */
   object Solution {
-    def sufficientSubset(root: TreeNode, limit: Int): TreeNode =
+
+    import scala.collection.immutable.Queue
+
+    def levelOrder(root: TreeNode): List[List[Int]] =
       root match
-        case null => null
-        case _ if root.left == null && root.right == null =>
-          if root.value < limit then null
-          else root
+        case null => Nil
         case _ =>
-          val left  = sufficientSubset(root.left, limit - root.value)
-          val right = sufficientSubset(root.right, limit - root.value)
-          if left == null && right == null then null
-          else
-            root.left = left
-            root.right = right
-            root
+          var q   = Queue[TreeNode](root)
+          var res = List[List[Int]]()
+          while q.nonEmpty do
+            val length = q.length
+            val level =
+              for i <- 0 until length yield q.dequeue match
+                case (cur, nq) =>
+                  q = if cur.left != null then nq.enqueue(cur.left) else nq
+                  q = if cur.right != null then q.enqueue(cur.right) else q
+                  cur.value
+            res = res :+ level.toList
+
+          res
   }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -51,5 +58,4 @@ object InsufficientNodesInRootToLeafPaths {
     def modify[S](ss: S => S): State[S, Unit] =
       for { s <- get[S]; _ <- put(ss(s)) } yield ()
   }
-
 }
