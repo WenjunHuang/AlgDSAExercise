@@ -8,21 +8,22 @@ object ShuDeZiJieGouLcof {
     */
   object Solution {
     def isSubStructure(A: TreeNode, B: TreeNode): Boolean =
-      if A == null || B == null then false
-      else if A.value == B.value && compareTree(A, B) then true
+      if (A == null || B == null) false
+      else if (A.value == B.value && compareTree(A, B)) true
       else isSubStructure(A.left, B) || isSubStructure(A.right, B)
 
     private def compareTree(one: TreeNode, two: TreeNode): Boolean =
-      (one, two) match
+      (one, two) match {
         case (_, null)              => true
         case (null, t) if t != null => false
         case _ =>
-          if one.value != two.value then false
+          if (one.value != two.value) false
           else compareTree(one.left, two.left) && compareTree(one.right, two.right)
+      }
   }
 //leetcode submit region end(Prohibit modification and deletion)
 
-  import scala.util.control.TailCalls.*
+  import scala.util.control.TailCalls._
 
   /** 栈安全的State Monad。可用于leetcode的用fp方式来解决问题。
     */

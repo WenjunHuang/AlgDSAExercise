@@ -2,11 +2,12 @@ package state
 
 import cats.effect.kernel.Sync
 import cats.effect.std.Console
-import cats.effect.{ IO, IOApp, Ref }
+import cats.effect.unsafe.{IORuntime, IORuntimeConfig}
+import cats.effect.{IO, IOApp, Ref}
 import cats.syntax.all.*
-import cats.{ effect, Applicative, Monad }
+import cats.{Applicative, Monad, effect}
 
-import java.time.{ Instant, ZoneId, ZoneOffset, ZonedDateTime }
+import java.time.{Instant, ZoneId, ZoneOffset, ZonedDateTime}
 import java.time.temporal.ChronoField
 
 trait Counter[F[_]]:
