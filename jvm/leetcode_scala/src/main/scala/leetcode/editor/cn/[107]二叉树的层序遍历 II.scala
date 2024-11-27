@@ -1,54 +1,32 @@
 package leetcode.editor.cn
 
-import leetcode.editor.cn.BinaryTreeZigzagLevelOrderTraversal.Solution.Direction.LeftToRight
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
-object BinaryTreeZigzagLevelOrderTraversal {
-  import scala.util.control.TailCalls.*
-//leetcode submit region begin(Prohibit modification and deletion)
+object BinaryTreeLevelOrderTraversalIi {
+
+  // leetcode submit region begin(Prohibit modification and deletion)
   /** Definition for a binary tree node. class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) { var value: Int = _value var left: TreeNode = _left var right: TreeNode =
     * _right }
     */
   object Solution {
-
-    import scala.collection.mutable
-
-    def zigzagLevelOrder(root: TreeNode): List[List[Int]] =
+    import scala.collection.mutable.{ ListBuffer, Queue }
+    def levelOrderBottom(root: TreeNode): List[List[Int]] =
       root match
         case null => Nil
         case _ =>
-          val queue  = mutable.Queue[TreeNode](root)
-          var res    = List[List[Int]]()
-          var curDir = Direction.LeftToRight
+          val res   = ListBuffer[List[Int]]()
+          val queue = Queue[TreeNode](root)
           while queue.nonEmpty do
-            // 按照从左到右的方式添加队列
-            val size             = queue.size
-            var level: List[Int] = Nil
-            for _ <- 0 until size do
+            val size = queue.size
+            val level = for _ <- 0 until size yield
               val cur = queue.dequeue()
               if cur.left != null then queue.enqueue(cur.left)
               if cur.right != null then queue.enqueue(cur.right)
+              cur.value
+            res.insert(0,level.toList)
 
-              curDir match
-                case Direction.LeftToRight =>
-                  level = level :+ cur.value
-                case Direction.RightToLeft =>
-                  level = cur.value +: level
-
-            res = res :+ level
-            curDir = curDir.switchDirection
-          res
-
-    enum Direction {
-      case LeftToRight
-      case RightToLeft
-
-      def switchDirection: Direction =
-        this match
-          case LeftToRight =>
-            RightToLeft
-          case RightToLeft =>
-            LeftToRight
-    }
+          res.toList
   }
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -79,4 +57,5 @@ object BinaryTreeZigzagLevelOrderTraversal {
     def modify[S](ss: S => S): State[S, Unit] =
       for { s <- get[S]; _ <- put(ss(s)) } yield ()
   }
+
 }
