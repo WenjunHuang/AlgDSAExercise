@@ -11,6 +11,7 @@ public:
     Node* right;
     Node* next;
     Node* parent;
+    std::vector<Node *> children;
 
     Node() : val(0), left(NULL), right(NULL), next(NULL) {}
 
@@ -18,6 +19,11 @@ public:
 
     Node(int _val, Node* _left, Node* _right, Node* _next)
             : val(_val), left(_left), right(_right), next(_next) {}
+
+    Node(int _val, std::vector<Node *> _children) {
+        val = _val;
+        children = _children;
+    }
 };
 struct TreeNode {
     int val;
