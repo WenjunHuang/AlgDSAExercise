@@ -2,12 +2,11 @@ import kotlin.Keys.{ kotlinLib, kotlinVersion }
 
 ThisBuild / version       := "0.1.0-SNAPSHOT"
 ThisBuild / organization  := "com.github.wenjunhuang"
-ThisBuild / scalaVersion  := "3.4.1"
+ThisBuild / scalaVersion  := "3.5.2"
 ThisBuild / kotlinVersion := "1.9.24"
 
 lazy val leetcodeScala = (project in file("leetcode_scala"))
   .settings(
-    scalaVersion                           := "3.4.1",
     name                                   := "leetcode_scala",
     libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
   )
