@@ -1,59 +1,62 @@
 package sort
 
-import scala.reflect.ClassTag
 import scala.math.Ordering.Implicits.*
+import scala.reflect.ClassTag
 
 object QuickSort {
-  def quickSort[T: ClassTag](arr: Array[T])(using Ordering[T]): Unit = {
+  def quickSort[T: ClassTag](arr: Array[T])(using Ordering[T]): Unit =
     if (arr.length > 1) {
-      def impl(arr: Array[T], left: Int, right: Int): Unit = {
-        if (left < arr.length && right < arr.length && right - left > 1) {
-          val p = pivot(arr, left, right)
-          impl(arr, left, p)
+      def impl(arr: Array[T], left: Int, right: Int): Unit =
+        if (left < right) {
+          val p = partition(arr, left, right)
+          impl(arr, left, p-1)
           impl(arr, p + 1, right)
-          MergeSort.merge(arr,left,p,right)
         }
-      }
 
       impl(arr, 0, arr.length - 1)
     }
+
+  private def partition[T: ClassTag](arr: Array[T], left: Int, right: Int)(using Ordering[T]): Int = {
+    // 必须采用随机pivot的方法，否则会使得最坏情况（有序数组）时算法复杂度为O(n^2)
+    val s = Math.floor(left + Math.random() * (right - left)).toInt
+    swap(arr,left,s)
+
+    var leftBound = left + 1
+    val pivot     = left
+    for { i <- (left + 1).to(right) } yield
+      if (arr(i) < arr(pivot)) {
+        swap(arr, leftBound, i)
+        leftBound += 1
+      }
+    swap(arr, leftBound - 1, pivot)
+    leftBound - 1
   }
 
-  private def pivot[T: ClassTag](arr: Array[T], left: Int, right: Int)(using Ordering[T]): Int =
-    if (right - left > 0) {
-      var index = left
-      for { i <- (left + 1).to(right) } yield
-        if (arr(i) < arr(left)) {
-          swap(arr, index, i)
-          index += 1
-        }
-      index
-    } else {
-      0
+  private def swap[T](arr: Array[T], src: Int, dest: Int): Unit =
+    if (src != dest) {
+      val t = arr(src)
+      arr(src) = arr(dest)
+      arr(dest) = t
     }
 
-  private def swap[T](arr: Array[T], src: Int, dest: Int): Unit = {
-    val t = arr(src)
-    arr(src) = arr(dest)
-    arr(dest) = t
-  }
-
   @main
-  def verifyQuickSort():Unit = {
+  def verifyQuickSort(): Unit = {
     // 生成一个包含100万个随机整数的数组用于测试
-    val randomArray = Array.fill(1000000)((Math.random() * 1000000).toInt)
+    val test = List(Array.fill(1000000)((Math.random() * 10000).toInt),0.to(1000000).toArray,Array.fill(1000000)(1))
 
     // 执行归并排序
-    quickSort(randomArray)
+    test.foreach { randomArray =>
+      quickSort(randomArray)
 
-    // 验证排序结果的正确性
-    for (index <- 1 until randomArray.length)
-      // 检查每个元素是否不小于前一个元素
-      if (randomArray(index - 1) > randomArray(index)) {
-        throw new Exception(s"排序错误：位置 ${index} 的元素小于前一个元素")
-      }
+      // 验证排序结果的正确性
+      for (index <- 1 until randomArray.length)
+        // 检查每个元素是否不小于前一个元素
+        if (randomArray(index - 1) > randomArray(index)) {
+          throw new Exception(s"排序错误：位置 ${index} 的元素小于前一个元素")
+        }
+      println("快速排序验证通过！")
+    }
 
-    println("快速排序验证通过！")
   }
 
 }
