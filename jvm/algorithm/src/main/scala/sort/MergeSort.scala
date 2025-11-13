@@ -7,7 +7,7 @@
 package sort
 
 // 导入必要的类型类和反射支持
-import scala.math.Ordered.given
+import scala.math.Ordered.orderingToOrdered
 import scala.reflect.ClassTag
 import scala.util.boundary
 
@@ -61,7 +61,7 @@ object MergeSort {
     * @param right
     *   右边界索引
     */
-  private def merge[T: ClassTag](arr: Array[T], left: Int, middle: Int, right: Int)(using Ordering[T]): Array[T] = {
+  def merge[T: ClassTag](arr: Array[T], left: Int, middle: Int, right: Int)(using Ordering[T]): Array[T] = {
     // 创建辅助数组存储合并结果
     val help       = Array.ofDim[T](right - left + 1)
     var helpIndex  = 0          // 辅助数组的索引
