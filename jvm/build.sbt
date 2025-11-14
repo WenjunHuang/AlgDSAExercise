@@ -45,7 +45,7 @@ lazy val designPattern = (project in file("design_pattern"))
 lazy val algorithm = (project in file("algorithm"))
   .settings(
     name := "algorithm",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19"
   )
 //  .enablePlugins(KotlinPlugin)
 
