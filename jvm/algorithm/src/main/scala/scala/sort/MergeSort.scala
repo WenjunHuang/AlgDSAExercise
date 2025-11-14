@@ -46,6 +46,7 @@ class MergeSort extends AnyFunSuite with ScalaCheckPropertyChecks {
       arr shouldBe sorted
     }
   }
+
   test("merge sort with partially sorted arrays") {
     forAll(partiallySortedArrayGen) { arr =>
       mergeSort(arr)

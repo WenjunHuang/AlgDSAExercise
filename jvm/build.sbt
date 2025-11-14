@@ -46,11 +46,15 @@ lazy val designPattern = (project in file("design_pattern"))
 lazy val algorithm = (project in file("algorithm"))
   .settings(
     name := "algorithm",
-    libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.19",
+    libraryDependencies ++= Seq(
+      "org.scalatest"     %% "scalatest"       % "3.2.19",
       "org.scalatestplus" %% "scalacheck-1-18" % "3.2.19.0",
-      "org.scalacheck" %% "scalacheck" % "1.18.0")
+      "org.scalacheck"    %% "scalacheck"      % "1.18.0",
+      "org.junit.jupiter"  % "junit-jupiter"   % "6.0.1",
+      "org.hamcrest"       % "hamcrest"        % "3.0",
+      "net.jqwik"          % "jqwik"           % "1.9.3"
+    )
   )
-//  .enablePlugins(KotlinPlugin)
 
 //lazy val fpLearn = (project in file("fp"))
 //  .settings(
