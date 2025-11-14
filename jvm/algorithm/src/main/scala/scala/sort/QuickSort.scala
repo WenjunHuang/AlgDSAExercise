@@ -5,12 +5,12 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers.*
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
-import sort.QuickSort.quickSortWithNetherlandsPartition
 import scala.math.Ordering.Implicits.*
 import scala.reflect.ClassTag
 import scala.sort.TestDataGenerator.{ duplicateArrayGen, extremeValueArrayGen, intArrayGen, largeArrayGen, partiallySortedArrayGen, sortedArrayGen }
+import QuickSort.*
 
-class QuickSortScala extends AnyFunSuite with TimeLimits with ScalaCheckPropertyChecks {
+class QuickSort extends AnyFunSuite with TimeLimits with ScalaCheckPropertyChecks {
 
   test("quick sort with random arrays") {
     forAll(intArrayGen) { arr =>
