@@ -4,6 +4,7 @@ ThisBuild / version       := "0.1.0-SNAPSHOT"
 ThisBuild / organization  := "com.github.wenjunhuang"
 ThisBuild / scalaVersion  := "3.7.4"
 ThisBuild / kotlinVersion := "2.2.21"
+ThisBuild / scalacOptions := Seq("-language", "postfixOps")
 
 lazy val leetcodeScala = (project in file("leetcode_scala"))
   .settings(
@@ -45,7 +46,9 @@ lazy val designPattern = (project in file("design_pattern"))
 lazy val algorithm = (project in file("algorithm"))
   .settings(
     name := "algorithm",
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19"
+    libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.19",
+      "org.scalatestplus" %% "scalacheck-1-18" % "3.2.19.0",
+      "org.scalacheck" %% "scalacheck" % "1.18.0")
   )
 //  .enablePlugins(KotlinPlugin)
 

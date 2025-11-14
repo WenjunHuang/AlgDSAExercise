@@ -4,12 +4,76 @@
   *
   * 时间复杂度: O(n log n) 空间复杂度: O(n) 稳定性: 稳定
   */
-package sort
+package scala.sort
 
 // 导入必要的类型类和反射支持
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.*
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+
 import scala.math.Ordered.orderingToOrdered
 import scala.reflect.ClassTag
+import scala.sort.MergeSort.*
+import scala.sort.TestDataGenerator.*
 import scala.util.boundary
+
+class MergeSort extends AnyFunSuite with ScalaCheckPropertyChecks {
+
+  test("merge sort with random arrays") {
+    forAll(intArrayGen) { arr =>
+      mergeSort(arr)
+      arr shouldBe sorted
+    }
+  }
+
+  test("merge sort with large arrays") {
+    forAll(largeArrayGen) { arr =>
+      mergeSort(arr)
+      arr shouldBe sorted
+    }
+  }
+
+  test("merge sort with sorted elements") {
+    forAll(sortedArrayGen) { arr =>
+      mergeSort(arr)
+      arr shouldBe sorted
+    }
+  }
+
+  test("merge sort with duplicated elements") {
+    forAll(duplicateArrayGen) { arr =>
+      mergeSort(arr)
+      arr shouldBe sorted
+    }
+  }
+  test("merge sort with partially sorted arrays") {
+    forAll(partiallySortedArrayGen) { arr =>
+      mergeSort(arr)
+      arr shouldBe sorted
+    }
+  }
+
+  test("merge sort with extreme values") {
+    forAll(extremeValueArrayGen) { arr =>
+      mergeSort(arr)
+      arr shouldBe sorted
+    }
+  }
+
+  test("merge sort preserves empty array") {
+    val arr = Array.empty[Int]
+    mergeSort(arr)
+    arr shouldBe empty
+  }
+
+  test("merge sort preserves single element array") {
+    forAll { (n: Int) =>
+      val arr = Array(n)
+      mergeSort(arr)
+      arr should contain theSameElementsAs Array(n)
+    }
+  }
+}
 
 object MergeSort {
 
