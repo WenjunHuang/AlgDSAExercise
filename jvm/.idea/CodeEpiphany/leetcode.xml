@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.wenjun.codeepiphany.leetcode.settings">
+    <option name="languageSettings">
+      <list>
+        <LanguageSettingsState sourceFolder="$PROJECT_DIR$/leetcode_java/src/main/java/leetcode" language="java" languageVersion="" fileNameTemplate="${velocity.camelCaseName(${challenge.slug})}" codeTemplate="package leetcode;&#10;&#10;class $velocity.camelCaseName($challenge.slug) {&#10;&#10;    $challenge.code&#10;&#10;public static void main(String[] args) {&#10;    // add your test code&#10;}&#10;}" />
+      </list>
+    </option>
+    <option name="queryCriteria">
+      <map>
+        <entry key="LeetCodeChallengesView-lastUI" value="QueryParameters" />
+        <entry key="LeetCodeKeywordQueryPresenter-criteria" value="{&quot;keyword&quot;:&quot;9&quot;,&quot;orderBy&quot;:null}" />
+        <entry key="LeetCodeKeywordQueryPresenter-pageSize" value="20" />
+        <entry key="LeetCodeParametersQueryPresenter-criteria" value="{&quot;selectedCategory&quot;:null,&quot;selectedFavorite&quot;:{&quot;id&quot;:&quot;wpwgkgt&quot;,&quot;name&quot;:&quot;Top Interview Questions&quot;,&quot;type&quot;:&quot;leetcode_favorites&quot;},&quot;selectedDifficulty&quot;:null,&quot;selectedStatus&quot;:null,&quot;tags&quot;:[],&quot;orderBy&quot;:[&quot;DIFFICULTY&quot;,&quot;Ascending&quot;]}" />
+        <entry key="LeetCodeParametersQueryPresenter-pageSize" value="100" />
+      </map>
+    </option>
+  </component>
+</project>
