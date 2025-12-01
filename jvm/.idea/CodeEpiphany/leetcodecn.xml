@@ -9,7 +9,7 @@
     <option name="queryCriteria">
       <map>
         <entry key="LeetCodeChallengesView-lastUI" value="QueryParameters" />
-        <entry key="LeetCodeParametersQueryPresenter-criteria" value="{&quot;selectedCategory&quot;:null,&quot;selectedFavorite&quot;:null,&quot;selectedDifficulty&quot;:null,&quot;selectedStatus&quot;:null,&quot;tags&quot;:[{&quot;name&quot;:&quot;链表&quot;,&quot;value&quot;:&quot;linked-list&quot;,&quot;groupValue&quot;:&quot;Common Data Structures&quot;,&quot;userObj&quot;:{&quot;id&quot;:&quot;554&quot;,&quot;name&quot;:&quot;Linked List&quot;,&quot;nameTranslated&quot;:&quot;链表&quot;,&quot;slug&quot;:&quot;linked-list&quot;,&quot;questions&quot;:[]}}],&quot;orderBy&quot;:null}" />
+        <entry key="LeetCodeParametersQueryPresenter-criteria" value="{&quot;selectedCategory&quot;:null,&quot;selectedFavorite&quot;:null,&quot;selectedDifficulty&quot;:&quot;medium&quot;,&quot;selectedStatus&quot;:null,&quot;tags&quot;:[{&quot;name&quot;:&quot;链表&quot;,&quot;value&quot;:&quot;linked-list&quot;,&quot;groupValue&quot;:&quot;Common Data Structures&quot;,&quot;userObj&quot;:{&quot;id&quot;:&quot;554&quot;,&quot;name&quot;:&quot;Linked List&quot;,&quot;nameTranslated&quot;:&quot;链表&quot;,&quot;slug&quot;:&quot;linked-list&quot;,&quot;questions&quot;:[]}}],&quot;orderBy&quot;:[&quot;DIFFICULTY&quot;,&quot;Ascending&quot;]}" />
         <entry key="LeetCodeParametersQueryPresenter-pageSize" value="100" />
       </map>
     </option>

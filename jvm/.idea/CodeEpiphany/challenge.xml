@@ -3,6 +3,29 @@
   <component name="com.wenjun.codeepiphany.challenge.settings">
     <option name="challenges">
       <map>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/CongWeiDaoTouDaYinLianBiaoLcof.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995328634939904000" />
+              <option name="challengeLanguageId" value="1995328634948292608" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[1,4,6,3]" />
+                  <option name="input" value="[3,6,4,1]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995328634960875520" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[1,4,6,3]" />
+                  <option name="input" value="[3,6,4,1]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/CopyListWithRandomPointer.java">
           <value>
             <ChallengeSettingsStateItem>
@@ -37,6 +60,176 @@
                 <TestCase>
                   <option name="expectedOutput" value="[[3,null],[3,0],[3,null]]" />
                   <option name="input" value="[[3,null],[3,0],[3,null]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/DeleteMiddleNodeLcci.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995321728485691392" />
+              <option name="challengeLanguageId" value="1995321728489885696" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="nothing is returned, but the new linked list looks like a-&gt;b-&gt;d-&gt;e-&gt;f" />
+                  <option name="input" value="[4,5,1,9]&#10;5" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995321728489885697" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="nothing is returned, but the new linked list looks like a-&gt;b-&gt;d-&gt;e-&gt;f" />
+                  <option name="input" value="[4,5,1,9]&#10;5" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/DesignCircularDeque.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995390185982005248" />
+              <option name="challengeLanguageId" value="1995390185994588160" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, true, true, true, false, 2, true, true, true, 4]" />
+                  <option name="input" value="[&quot;MyCircularDeque&quot;,&quot;insertLast&quot;,&quot;insertLast&quot;,&quot;insertFront&quot;,&quot;insertFront&quot;,&quot;getRear&quot;,&quot;isFull&quot;,&quot;deleteLast&quot;,&quot;insertFront&quot;,&quot;getFront&quot;]&#10;[[3],[1],[2],[3],[4],[],[],[],[4],[]]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995390185998782464" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, true, true, true, false, 2, true, true, true, 4]" />
+                  <option name="input" value="[&quot;MyCircularDeque&quot;,&quot;insertLast&quot;,&quot;insertLast&quot;,&quot;insertFront&quot;,&quot;insertFront&quot;,&quot;getRear&quot;,&quot;isFull&quot;,&quot;deleteLast&quot;,&quot;insertFront&quot;,&quot;getFront&quot;]&#10;[[3],[1],[2],[3],[4],[],[],[],[4],[]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/DesignCircularQueue.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995391514255167488" />
+              <option name="challengeLanguageId" value="1995391514263556096" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, true, true, true, false, 3, true, true, true, 4]" />
+                  <option name="input" value="[&quot;MyCircularQueue&quot;,&quot;enQueue&quot;,&quot;enQueue&quot;,&quot;enQueue&quot;,&quot;enQueue&quot;,&quot;Rear&quot;,&quot;isFull&quot;,&quot;deQueue&quot;,&quot;enQueue&quot;,&quot;Rear&quot;]&#10;[[3],[1],[2],[3],[4],[],[],[],[4],[]]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995391514267750400" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, true, true, true, false, 3, true, true, true, 4]" />
+                  <option name="input" value="[&quot;MyCircularQueue&quot;,&quot;enQueue&quot;,&quot;enQueue&quot;,&quot;enQueue&quot;,&quot;enQueue&quot;,&quot;Rear&quot;,&quot;isFull&quot;,&quot;deQueue&quot;,&quot;enQueue&quot;,&quot;Rear&quot;]&#10;[[3],[1],[2],[3],[4],[],[],[],[4],[]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/DesignLinkedList.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995383245277106176" />
+              <option name="challengeLanguageId" value="1995383245289689088" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, null, null, null, 2, null, 3]" />
+                  <option name="input" value="[&quot;MyLinkedList&quot;,&quot;addAtHead&quot;,&quot;addAtTail&quot;,&quot;addAtIndex&quot;,&quot;get&quot;,&quot;deleteAtIndex&quot;,&quot;get&quot;]&#10;[[],[1],[3],[1,2],[1],[1],[1]]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995383245293883392" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, null, null, null, 2, null, 3]" />
+                  <option name="input" value="[&quot;MyLinkedList&quot;,&quot;addAtHead&quot;,&quot;addAtTail&quot;,&quot;addAtIndex&quot;,&quot;get&quot;,&quot;deleteAtIndex&quot;,&quot;get&quot;]&#10;[[],[1],[3],[1,2],[1],[1],[1]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/FlattenAMultilevelDoublyLinkedList.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995341663429595136" />
+              <option name="challengeLanguageId" value="1995341663446372352" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[1,2,3,7,8,11,12,9,10,4,5,6]" />
+                  <option name="input" value="[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1,3,2]" />
+                  <option name="input" value="[1,2,null,3]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995341663450566656" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[1,2,3,7,8,11,12,9,10,4,5,6]" />
+                  <option name="input" value="[1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1,3,2]" />
+                  <option name="input" value="[1,2,null,3]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/IntersectionOfTwoLinkedLists.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995317612472569856" />
+              <option name="challengeLanguageId" value="1995317612485152768" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="Intersected at '8'" />
+                  <option name="input" value="8&#10;[4,1,8,4,5]&#10;[5,6,1,8,4,5]&#10;2&#10;3" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="Intersected at '2'" />
+                  <option name="input" value="2&#10;[1,9,1,2,4]&#10;[3,2,4]&#10;3&#10;1" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="No intersection" />
+                  <option name="input" value="0&#10;[2,6,4]&#10;[1,5]&#10;3&#10;2" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995317612497735680" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="Intersected at '8'" />
+                  <option name="input" value="8&#10;[4,1,8,4,5]&#10;[5,6,1,8,4,5]&#10;2&#10;3" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="Intersected at '2'" />
+                  <option name="input" value="2&#10;[1,9,1,2,4]&#10;[3,2,4]&#10;3&#10;1" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="No intersection" />
+                  <option name="input" value="0&#10;[2,6,4]&#10;[1,5]&#10;3&#10;2" />
                 </TestCase>
               </option>
             </ChallengeSettingsStateItem>
@@ -146,6 +339,232 @@
                 <TestCase>
                   <option name="expectedOutput" value="false" />
                   <option name="input" value="[1,2]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/RemoveLinkedListElements.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995315218661642240" />
+              <option name="challengeLanguageId" value="1995315218854580224" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[1,2,3,4,5]" />
+                  <option name="input" value="[1,2,6,3,4,5,6]&#10;6" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]&#10;1" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[7,7,7,7]&#10;7" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995315218875551744" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[1,2,3,4,5]" />
+                  <option name="input" value="[1,2,6,3,4,5,6]&#10;6" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]&#10;1" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[7,7,7,7]&#10;7" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/RemoveZeroSumConsecutiveNodesFromLinkedList.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995406863340015616" />
+              <option name="challengeLanguageId" value="1995406863352598528" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[3,1]" />
+                  <option name="input" value="[1,2,-3,3,1]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1,2,4]" />
+                  <option name="input" value="[1,2,3,-3,4]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1]" />
+                  <option name="input" value="[1,2,3,-3,-2]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995406863360987136" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[3,1]" />
+                  <option name="input" value="[1,2,-3,3,1]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1,2,4]" />
+                  <option name="input" value="[1,2,3,-3,4]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1]" />
+                  <option name="input" value="[1,2,3,-3,-2]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/ReverseLinkedList.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995316232970178560" />
+              <option name="challengeLanguageId" value="1995316232978567168" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[5,4,3,2,1]" />
+                  <option name="input" value="[1,2,3,4,5]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[2,1]" />
+                  <option name="input" value="[1,2]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995316232991150080" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[5,4,3,2,1]" />
+                  <option name="input" value="[1,2,3,4,5]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[2,1]" />
+                  <option name="input" value="[1,2]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/RotateList.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995399459181301760" />
+              <option name="challengeLanguageId" value="1995399459185496064" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[4,5,1,2,3]" />
+                  <option name="input" value="[1,2,3,4,5]&#10;2" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[2,0,1]" />
+                  <option name="input" value="[0,1,2]&#10;4" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995399459193884672" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[4,5,1,2,3]" />
+                  <option name="input" value="[1,2,3,4,5]&#10;2" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[2,0,1]" />
+                  <option name="input" value="[0,1,2]&#10;4" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/SplitLinkedListInParts.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995329639614124032" />
+              <option name="challengeLanguageId" value="1995329639635095552" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[[1],[2],[3],[],[]]" />
+                  <option name="input" value="[1,2,3]&#10;5" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[[1,2,3,4],[5,6,7],[8,9,10]]" />
+                  <option name="input" value="[1,2,3,4,5,6,7,8,9,10]&#10;3" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995329639639289856" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[[1],[2],[3],[],[]]" />
+                  <option name="input" value="[1,2,3]&#10;5" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[[1,2,3,4],[5,6,7],[8,9,10]]" />
+                  <option name="input" value="[1,2,3,4,5,6,7,8,9,10]&#10;3" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/SwapNodesInPairs.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1995399372438900736" />
+              <option name="challengeLanguageId" value="1995399372447289344" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[2,1,4,3]" />
+                  <option name="input" value="[1,2,3,4]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1]" />
+                  <option name="input" value="[1]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[2,1,3]" />
+                  <option name="input" value="[1,2,3]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1995399372455677952" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[2,1,4,3]" />
+                  <option name="input" value="[1,2,3,4]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[]" />
+                  <option name="input" value="[]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[1]" />
+                  <option name="input" value="[1]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[2,1,3]" />
+                  <option name="input" value="[1,2,3]" />
                 </TestCase>
               </option>
             </ChallengeSettingsStateItem>
