@@ -16,7 +16,7 @@ class RotateList {
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-        
+        return head;
     }
 }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)

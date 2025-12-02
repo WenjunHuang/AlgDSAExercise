@@ -1,5 +1,7 @@
 package leetcodecn;
 
+import java.util.HashMap;
+
 // [1267]从链表中删去总和值为零的连续节点
 class RemoveZeroSumConsecutiveNodesFromLinkedList {
 
@@ -18,42 +20,26 @@ class RemoveZeroSumConsecutiveNodesFromLinkedList {
      */
     class Solution {
         public ListNode removeZeroSumSublists(ListNode head) {
-            var from = head;
-
-            while (from != null) {
-                var count = 0;
-                boolean deleted = false;
-                var cur = from;
-                while (cur != null) {
-                    count += cur.val;
-                    if (count == 0) {
-                        head = deleteRange(head, from, cur);
-                        from = head;
-                        deleted = true;
-                        break;
-                    }
-                    cur = cur.next;
-                }
-
-                if (!deleted)
-                    from = from.next;
+            ListNode dummy = new ListNode(0);
+            dummy.next = head;
+            var seen = new HashMap<Integer, ListNode>();
+            int prefix = 0;
+            for (var p = dummy; p != null; p = p.next) {
+                prefix += p.val;
+                seen.put(prefix, p);
             }
-            return head;
+
+            prefix = 0;
+            for (var p = dummy; p != null; p = p.next) {
+                prefix += p.val;
+                p.next = seen.get(prefix).next;
+            }
+
+            return dummy.next;
+
         }
 
-        ListNode deleteRange(ListNode node, ListNode from, ListNode to) {
-            var dump = new ListNode(-1);
-            dump.next = node;
-            var pre = dump;
-            var cur = node;
-            while (cur != from) {
-                var t = cur.next;
-                pre = cur;
-                cur = t;
-            }
-            pre.next = to.next;
-            return dump.next;
-        }
+
     }
 //IMPORTANT!! Submit Code Region End(Do not remove this line)
 
