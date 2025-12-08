@@ -9,9 +9,11 @@
     <option name="queryCriteria">
       <map>
         <entry key="LeetCodeChallengesView-lastUI" value="QueryParameters" />
-        <entry key="LeetCodeKeywordQueryPresenter-criteria" value="{&quot;keyword&quot;:&quot;9&quot;,&quot;orderBy&quot;:null}" />
+        <entry key="LeetCodeCompanyQueryPresenter-criteria" value="{&quot;selectedCompanies&quot;:[],&quot;selectedPositions&quot;:[],&quot;selectedDifficulty&quot;:null,&quot;selectedStatus&quot;:null,&quot;selectedTags&quot;:[],&quot;selectedInterviewPeriod&quot;:&quot;thirty-days&quot;,&quot;orderBy&quot;:null}" />
+        <entry key="LeetCodeCompanyQueryPresenter-pageSize" value="20" />
+        <entry key="LeetCodeKeywordQueryPresenter-criteria" value="{&quot;keyword&quot;:&quot;16&quot;,&quot;orderBy&quot;:null}" />
         <entry key="LeetCodeKeywordQueryPresenter-pageSize" value="20" />
-        <entry key="LeetCodeParametersQueryPresenter-criteria" value="{&quot;selectedCategory&quot;:null,&quot;selectedFavorite&quot;:{&quot;id&quot;:&quot;wpwgkgt&quot;,&quot;name&quot;:&quot;Top Interview Questions&quot;,&quot;type&quot;:&quot;leetcode_favorites&quot;},&quot;selectedDifficulty&quot;:null,&quot;selectedStatus&quot;:null,&quot;tags&quot;:[],&quot;orderBy&quot;:[&quot;DIFFICULTY&quot;,&quot;Ascending&quot;]}" />
+        <entry key="LeetCodeParametersQueryPresenter-criteria" value="{&quot;selectedCategory&quot;:null,&quot;selectedFavorite&quot;:null,&quot;selectedDifficulty&quot;:null,&quot;selectedStatus&quot;:null,&quot;tags&quot;:[],&quot;orderBy&quot;:[&quot;FRONTEND_ID&quot;,&quot;Ascending&quot;]}" />
         <entry key="LeetCodeParametersQueryPresenter-pageSize" value="100" />
       </map>
     </option>
