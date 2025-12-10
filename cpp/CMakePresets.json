@@ -30,7 +30,7 @@
       "generator": "Ninja Multi-Config",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "environment": {
-        "HTTPS_PROXY": "http://127.0.0.1:9799"
+        "HTTPS_PROXY": "http://127.0.0.1:9798"
       }
     }
   ]

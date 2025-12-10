@@ -453,6 +453,68 @@
             </ChallengeSettingsStateItem>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/LongestSubsequenceWithLimitedSum.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998668378818088960" />
+              <option name="challengeLanguageId" value="1998668378826477568" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[2,3,4]" />
+                  <option name="input" value="[4,5,2,1]&#10;[3,10,21]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[0]" />
+                  <option name="input" value="[2,3,4,5]&#10;[1]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998668378839060480" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[2,3,4]" />
+                  <option name="input" value="[4,5,2,1]&#10;[3,10,21]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="[0]" />
+                  <option name="input" value="[2,3,4,5]&#10;[1]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/MaximumXorOfTwoNumbersInAnArray.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998629589030670336" />
+              <option name="challengeLanguageId" value="1998629589043253248" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="28" />
+                  <option name="input" value="[3,10,5,25,2,8]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="127" />
+                  <option name="input" value="[14,70,53,83,49,91,36,80,92,51,66,70]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998629589051641856" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="28" />
+                  <option name="input" value="[3,10,5,25,2,8]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="127" />
+                  <option name="input" value="[14,70,53,83,49,91,36,80,92,51,66,70]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/MergeKSortedLists.java">
           <value>
             <ChallengeSettingsStateItem>
@@ -487,6 +549,37 @@
                 <TestCase>
                   <option name="expectedOutput" value="[]" />
                   <option name="input" value="[[]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/MinimumOperationsToHalveArraySum.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998605957399187456" />
+              <option name="challengeLanguageId" value="1998605957571153920" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="3" />
+                  <option name="input" value="[5,19,8,1]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="3" />
+                  <option name="input" value="[3,8,20]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998605957592125440" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="3" />
+                  <option name="input" value="[5,19,8,1]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="3" />
+                  <option name="input" value="[3,8,20]" />
                 </TestCase>
               </option>
             </ChallengeSettingsStateItem>
