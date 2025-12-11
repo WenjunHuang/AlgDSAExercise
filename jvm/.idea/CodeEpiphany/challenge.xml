@@ -375,6 +375,37 @@
             </ChallengeSettingsStateItem>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/Largest1BorderedSquare.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998964501722042368" />
+              <option name="challengeLanguageId" value="1998964501730430976" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="9" />
+                  <option name="input" value="[[1,1,1],[1,0,1],[1,1,1]]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="1" />
+                  <option name="input" value="[[1,1,0,0]]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998964501738819584" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="9" />
+                  <option name="input" value="[[1,1,1],[1,0,1],[1,1,1]]" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="1" />
+                  <option name="input" value="[[1,1,0,0]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/LinkedListCycle.java">
           <value>
             <ChallengeSettingsStateItem>
@@ -665,6 +696,29 @@
                 <TestCase>
                   <option name="expectedOutput" value="[null, null, true, false, true, null, true]" />
                   <option name="input" value="[&quot;Trie&quot;,&quot;insert&quot;,&quot;search&quot;,&quot;search&quot;,&quot;startsWith&quot;,&quot;insert&quot;,&quot;search&quot;]&#10;[[],[&quot;apple&quot;],[&quot;apple&quot;],[&quot;app&quot;],[&quot;app&quot;],[&quot;app&quot;],[&quot;app&quot;]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/RangeSumQuery2dImmutable.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998961944467476480" />
+              <option name="challengeLanguageId" value="1998961944488448000" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, 8, 11, 12]" />
+                  <option name="input" value="[&quot;NumMatrix&quot;,&quot;sumRegion&quot;,&quot;sumRegion&quot;,&quot;sumRegion&quot;]&#10;[[[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]],[2,1,4,3],[1,1,2,2],[1,2,2,4]]" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998961944501030912" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="[null, 8, 11, 12]" />
+                  <option name="input" value="[&quot;NumMatrix&quot;,&quot;sumRegion&quot;,&quot;sumRegion&quot;,&quot;sumRegion&quot;]&#10;[[[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]],[2,1,4,3],[1,1,2,2],[1,2,2,4]]" />
                 </TestCase>
               </option>
             </ChallengeSettingsStateItem>
@@ -981,6 +1035,37 @@
             </ChallengeSettingsStateItem>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/StampingTheGrid.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1999013621576896512" />
+              <option name="challengeLanguageId" value="1999013621589479424" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="true" />
+                  <option name="input" value="[[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0]]&#10;4&#10;3" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="false" />
+                  <option name="input" value="[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]&#10;2&#10;2" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="leetcodecn" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1999013621597868032" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="true" />
+                  <option name="input" value="[[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0],[1,0,0,0]]&#10;4&#10;3" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="false" />
+                  <option name="input" value="[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]&#10;2&#10;2" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/leetcode_java/src/main/java/leetcodecn/SwapNodesInPairs.java">
           <value>
             <ChallengeSettingsStateItem>
@@ -1062,6 +1147,91 @@
                 <TestCase>
                   <option name="expectedOutput" value="[]" />
                   <option name="input" value="[[]]" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/luogu_java/src/main/java/luogu/P3397.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1999002053564829696" />
+              <option name="challengeLanguageId" value="1999002053577412608" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="0 1 1 1 0&#10;0 1 1 0 0&#10;0 1 2 1 1&#10;0 0 1 1 1&#10;0 0 1 1 1" />
+                  <option name="input" value="5 3&#10;2 2 3 3&#10;3 3 5 5&#10;1 2 1 4" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="luogu" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1999002053581606912" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="0 1 1 1 0&#10;0 1 1 0 0&#10;0 1 2 1 1&#10;0 0 1 1 1&#10;0 0 1 1 1" />
+                  <option name="input" value="5 3&#10;2 2 3 3&#10;3 3 5 5&#10;1 2 1 4" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/luogu_java/src/main/java/luogu/P4231.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998943647583834112" />
+              <option name="challengeLanguageId" value="1998943647827103744" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="3 10" />
+                  <option name="input" value="5 2&#10;1 5 2 10&#10;2 4 1 1&#10;" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="3 10" />
+                  <option name="input" value="6 2&#10;1 5 2 10&#10;2 4 1 1" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="luogu" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998943647835492352" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="3 10" />
+                  <option name="input" value="5 2&#10;1 5 2 10&#10;2 4 1 1&#10;" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="3 10" />
+                  <option name="input" value="6 2&#10;1 5 2 10&#10;2 4 1 1" />
+                </TestCase>
+              </option>
+            </ChallengeSettingsStateItem>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/luogu_java/src/main/java/luogu/P5026.java">
+          <value>
+            <ChallengeSettingsStateItem>
+              <option name="challengeId" value="1998950688696176640" />
+              <option name="challengeLanguageId" value="1998950688717148160" />
+              <option name="defaultTestCases">
+                <TestCase>
+                  <option name="expectedOutput" value="0 0 1 0 -1 0 1 0 0 0 " />
+                  <option name="input" value="1 10&#10;1 5" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="-2 0 0 0 0 0 2 2 2 2" />
+                  <option name="input" value="2 10&#10;2 6&#10;3 1" />
+                </TestCase>
+              </option>
+              <option name="dojo" value="luogu" />
+              <option name="language" value="java" />
+              <option name="solutionId" value="1998950688725536768" />
+              <option name="testCases">
+                <TestCase>
+                  <option name="expectedOutput" value="0 0 1 0 -1 0 1 0 0 0 " />
+                  <option name="input" value="1 10&#10;1 5" />
+                </TestCase>
+                <TestCase>
+                  <option name="expectedOutput" value="-2 0 0 0 0 0 2 2 2 2" />
+                  <option name="input" value="2 10&#10;2 6&#10;3 1" />
                 </TestCase>
               </option>
             </ChallengeSettingsStateItem>

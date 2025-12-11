@@ -9,7 +9,7 @@
     <option name="queryCriteria">
       <map>
         <entry key="LeetCodeChallengesView-lastUI" value="SearchByKeyword" />
-        <entry key="LeetCodeKeywordQueryPresenter-criteria" value="{&quot;keyword&quot;:&quot;前序和&quot;,&quot;orderBy&quot;:null}" />
+        <entry key="LeetCodeKeywordQueryPresenter-criteria" value="{&quot;keyword&quot;:&quot;2132&quot;,&quot;orderBy&quot;:null}" />
         <entry key="LeetCodeKeywordQueryPresenter-pageSize" value="100" />
         <entry key="LeetCodeParametersQueryPresenter-criteria" value="{&quot;selectedCategory&quot;:null,&quot;selectedFavorite&quot;:null,&quot;selectedDifficulty&quot;:null,&quot;selectedStatus&quot;:null,&quot;tags&quot;:[],&quot;orderBy&quot;:[&quot;FRONTEND_ID&quot;,&quot;Ascending&quot;]}" />
         <entry key="LeetCodeParametersQueryPresenter-pageSize" value="100" />
