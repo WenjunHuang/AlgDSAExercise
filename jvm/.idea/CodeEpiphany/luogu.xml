@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.wenjun.codeepiphany.luogu.settings">
+    <option name="languageSettings">
+      <list>
+        <LanguageSettingsState sourceFolder="D:\Work\AlgDSAExercise\jvm\luogu_java\src\main\java\luogu" language="java" languageVersion="21" fileNameTemplate="${challenge.id}" codeTemplate="package luogu;&#10;${beginRegion}&#10;// add your imports here&#10;import java.io.*;&#10;${endRegion}&#10;&#10;public class $!velocity.camelCaseName($challenge.id) {&#10;&#10;${beginRegion}&#10;    class Main {&#10;        public static void main(String[] args)throws Exception {&#10;            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));&#10;            var in = new StreamTokenizer(br);&#10;            PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out));&#10;            // add your code here&#10;            out.flush();&#10;            out.close();&#10;            br.close();&#10;        }&#10;    }&#10;${endRegion}&#10;}" />
+      </list>
+    </option>
+    <option name="queryCriteria">
+      <map>
+        <entry key="LuoGuChallengesView-latestUI" value="SearchByKeyword" />
+        <entry key="LuoGuKeywordQueryPresenter-criteria" value="{&quot;keyword&quot;:&quot;P3397&quot;,&quot;orderBy&quot;:null}" />
+        <entry key="LuoGuKeywordQueryPresenter-pageSize" value="20" />
+        <entry key="LuoGuParametersQueryPresenter-criteria" value="{&quot;selectedQuestionBank&quot;:null,&quot;selectedDifficulty&quot;:null,&quot;selectedTags&quot;:[],&quot;orderBy&quot;:null}" />
+        <entry key="LuoGuParametersQueryPresenter-pageSize" value="50" />
+      </map>
+    </option>
+  </component>
+</project>
